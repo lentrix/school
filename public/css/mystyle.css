@@ -43,6 +43,7 @@ h1, h2, h3, h4 {
 
 .sidebar {
     background-color: rgb(36, 46, 63);
+    padding-bottom: 20px;
 }
 
 footer {

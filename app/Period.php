@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Period extends Model
 {
     public $fillable = ['accronym', 'name', 'start', 'end', 'type'];
+    protected $dates = ['start', 'end'];
 
     public function classes() {
         return $this->hasMany('App\Classes');

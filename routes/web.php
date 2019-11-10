@@ -18,4 +18,11 @@ Route::group(['middleware'=>'auth'], function() {
     Route::get('/dashboard', 'SiteController@dashboard');
     Route::get('/logout', 'SiteController@logout');
 
+    Route::get('/periods', 'PeriodController@index')->middleware(['role:admin']);
+    Route::post('/periods', 'PeriodController@store')->middleware(['role:admin']);
+    Route::get('/periods/create', 'PeriodController@create')->middleware(['role:admin']);
+    Route::get('/periods/search', 'PeriodController@search')->middleware(['role:admin']);
+    Route::get('/periods/{period}', 'PeriodController@edit')->middleware(['role:admin']);
+    Route::patch('/periods/{period}', 'PeriodController@update')->middleware(['role:admin']);
+    Route::post('/periods/{period}/change-status', 'PeriodController@changeStatus')->middleware(['role:admin']);
 });

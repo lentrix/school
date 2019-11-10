@@ -32,6 +32,12 @@
             </div>
         </div>
     </div>
+
+    <script>
+    $(document).ready(function(){
+        $(".alert").delay(4000).fadeOut(1000);
+    })
+    </script>
     @yield('scripts')
 
     <footer>
