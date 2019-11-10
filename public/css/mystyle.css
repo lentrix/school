@@ -1,0 +1,91 @@
+@font-face {
+    font-family: 'abel';
+    src: url('../fonts/Abel-Regular.ttf');
+}
+
+@font-face {
+    font-family: 'quicksand';
+    src: url('../fonts/Quicksand-Regular.ttf');
+}
+
+@font-face {
+    font-family: 'canterbury';
+    src: url('../fonts/Canterbury.ttf');
+}
+
+@font-face {
+    font-family: 'squada';
+    src: url('../fonts/SquadaOne-Regular.ttf');
+}
+
+* {
+    font-family: 'quicksand';
+}
+
+body {
+    background-color: #222;;
+}
+
+h1, h2, h3, h4 {
+    font-family: 'squada';
+}
+
+.navbar-brand {
+    font-family: 'quicksand';
+    font-size: 1.3em;
+}
+
+.nav-link {
+    font-family: 'abel';
+    font-size: 1.2em;
+    padding-right: 20px!important;
+}
+
+.sidebar {
+    background-color: rgb(36, 46, 63);
+}
+
+footer {
+    text-align: center;
+    color: #777;
+    font-size: 0.85em;
+    background-color: #222;
+    padding: 20px 0;
+}
+
+.content {
+    padding-bottom: 50px;
+}
+
+.row-eq-height {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display:         flex;
+}
+
+.user-details {
+    margin-top: 10px;
+    text-align: center;
+    padding-bottom: 10px;
+    border-bottom: 1px solid rgb(153, 191, 235);
+}
+
+.profile-pic {
+    width: 80%;
+    margin: 0 auto;
+}
+
+.sidebar-link {
+    line-height: 25px;
+    background-color: rgb(63, 80, 109);
+    display: block;
+    padding: 5px 5px 5px 15px;
+    text-decoration: none!important;
+    border-bottom: 1px solid rgb(153, 191, 235);
+}
+
+.sidebar-link:hover {
+    background-color: rgb(19, 25, 34);
+    color: #ddd;
+}
