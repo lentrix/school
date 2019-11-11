@@ -12,7 +12,7 @@
 */
 Route::post('/login','SiteController@login');
 
-Route::get('/', 'SiteController@index');
+Route::get('/', 'SiteController@index')->name('login');
 
 Route::group(['middleware'=>'auth'], function() {
     Route::get('/dashboard', 'SiteController@dashboard');
