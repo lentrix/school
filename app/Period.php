@@ -14,7 +14,7 @@ class Period extends Model
     }
 
     public static function listEnrolment() {
-        return static::where('status','enrolment')->pluck('name', 'id');
+        return static::where('status','enrol')->pluck('name', 'id');
     }
 
     public function enrols() {

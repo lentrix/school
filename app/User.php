@@ -63,4 +63,14 @@ class User extends Authenticatable
         $r = Role::where('user_id', $this->id)->where('role', $role)->first();
         return $r!=null;
     }
+
+    public static function list() {
+        $users = static::orderBy('lname')->orderBy('fname')->get();
+        $list = [];
+        foreach($users as $u) {
+            $list[$u->id] = $u->fullName;
+        }
+
+        return $list;
+    }
 }

@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Section extends Model
 {
-    protected $fillable = ['name', 'period_id', 'program_id', 'level_id', 'room_id','teacher_id'];
+    protected $fillable = ['name', 'period_id', 'program_id', 'level_id', 'room_id','user_id'];
 
     public function program() {
         return $this->belongsTo('App\Program', 'program_id');
@@ -32,10 +32,15 @@ class Section extends Model
         return $this->hasMany('App\Enrol');
     }
 
+    public function user() {
+        return $this->belongsTo('App\User');
+    }
+
     public function students() {
         return \App\Student::whereHas('enrols', function($query){
             $query->where('section_id', $this->id);
-        })->with('enrols')->get();
+        })->with('enrols')
+        ->orderBy('lname')->orderBy('fname')->get();
     }
 
     public function identityString() {

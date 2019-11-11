@@ -19,7 +19,7 @@
 <body>
 
     @include("nav")
-    <div class="container-fluid"  style="background-color: #dfdfdf;">
+    <div class="container-fluid"  style="background-color: #fefefe;">
         <div class="row">
             <div class="col-lg-2 col-md-3 sidebar">
                 @if(!auth()->guest())

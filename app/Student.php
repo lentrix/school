@@ -12,14 +12,16 @@ class Student extends Model
         'mphone', 'father', 'fphone', 'pr_address'
     ];
 
+    protected $dates = ['bdate'];
+
     public $incrementing = false;
     protected $keyType = "string";
 
-    public function fullName() {
+    public function getFullNameAttribute() {
         return $this->lname . ", " . $this->fname . " " . substr($this->mname,0,1) . ".";
     }
 
-    public function fullAddress() {
+    public function getFullAddressAttribute() {
         return $this->barangay . ", " . $this->town . ", " . $this->province;
     }
 
