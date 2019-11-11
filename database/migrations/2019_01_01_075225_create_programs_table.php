@@ -17,6 +17,7 @@ class CreateProgramsTable extends Migration
             $table->increments('id');
             $table->string('accronym', 20);
             $table->string('name');
+            $table->string('category');
             $table->integer('dept_id')->unsigned();
             $table->foreign('dept_id')->references('id')->on('departments');
             $table->timestamps();

@@ -17,7 +17,8 @@ class DepartmentTableSeeder extends Seeder
                 'name' => 'Pre-Elementary',
                 'program' => [
                     'accronym'  =>  'Pre-Elem',
-                    'name'      =>  'Pre-Elementary'
+                    'name'      =>  'Pre-Elementary',
+                    'category'  =>  'pre-elem'
                 ]
             ],
             [
@@ -25,7 +26,8 @@ class DepartmentTableSeeder extends Seeder
                 'name' => 'Elementary',
                 'program' => [
                     'accronym'  =>  'Elem',
-                    'name'      =>  'Elementary'
+                    'name'      =>  'Elementary',
+                    'category'  =>  'elem'
                 ]
             ],
             [
@@ -33,7 +35,8 @@ class DepartmentTableSeeder extends Seeder
                 'name' => 'Junior High School',
                 'program' => [
                     'accronym'  =>  'JHS',
-                    'name'      =>  'Junior High School'
+                    'name'      =>  'Junior High School',
+                    'category'  =>  'jhs'
                 ]
             ],
             [
@@ -41,7 +44,8 @@ class DepartmentTableSeeder extends Seeder
                 'name' => 'Senior High School',
                 'program' => [
                     'accronym'  =>  'SHS',
-                    'name'      =>  'Senior High School'
+                    'name'      =>  'Senior High School',
+                    'category'  =>  'shs'
                 ]
             ],
             [
@@ -49,7 +53,8 @@ class DepartmentTableSeeder extends Seeder
                 'name' => 'College of Arts, Sciences & Technology',
                 'program' => [
                     'accronym'  =>  'BSIT',
-                    'name'      =>  'Bachelor of Science in Information Technology'
+                    'name'      =>  'Bachelor of Science in Information Technology',
+                    'category'  =>  'college'
                 ]
             ],
             [
@@ -57,7 +62,8 @@ class DepartmentTableSeeder extends Seeder
                 'name' => 'College of Accountancy, Business & Mgt. - Business',
                 'program' => [
                     'accronym'  =>  'BSA',
-                    'name'      =>  'Bachelor of Science in Accountancy'
+                    'name'      =>  'Bachelor of Science in Accountancy',
+                    'category'  =>  'college'
                 ]
             ],
             [
@@ -65,7 +71,8 @@ class DepartmentTableSeeder extends Seeder
                 'name' => 'College of Accountancy, Business & Mgt. - Hospitality',
                 'program' => [
                     'accronym'  =>  'BSHRM',
-                    'name'      =>  'Bachelor of Science in Hotel & Restaurant Management'
+                    'name'      =>  'Bachelor of Science in Hotel & Restaurant Management',
+                    'category'  =>  'college'
                 ]
             ],
             [
@@ -73,7 +80,8 @@ class DepartmentTableSeeder extends Seeder
                 'name' => 'College of Criminal Justice',
                 'program' => [
                     'accronym'  =>  'BSCRIM',
-                    'name'      =>  'Bachelor of Science in Criminology'
+                    'name'      =>  'Bachelor of Science in Criminology',
+                    'category'  =>  'college'
                 ]
             ],
             [
@@ -81,7 +89,8 @@ class DepartmentTableSeeder extends Seeder
                 'name' => 'College of Education',
                 'program' => [
                     'accronym'  =>  'BEED',
-                    'name'      =>  'Bachelor of Elementary Education'
+                    'name'      =>  'Bachelor of Elementary Education',
+                    'category'  =>  'college'
                 ]
             ],
             [
@@ -89,7 +98,8 @@ class DepartmentTableSeeder extends Seeder
                 'name' => 'College of Nursing',
                 'program' => [
                     'accronym' =>   'BSN',
-                    'name'      =>  'Bachelor of Science in Nursing'
+                    'name'      =>  'Bachelor of Science in Nursing',
+                    'category'  =>  'college'
                 ]
             ],
         ];

@@ -18,12 +18,6 @@ Route::group(['middleware'=>'auth'], function() {
     Route::get('/dashboard', 'SiteController@dashboard');
     Route::get('/logout', 'SiteController@logout');
 
-    Route::get('/students/search', 'StudentController@search')->middleware('role:registrar');
-    Route::resource('/students', 'StudentController')->middleware(['role:registrar']);
-
-    Route::get('/section/search', 'SectionController@search')->middleware(['role:registrar']);
-    Route::resource('/sections', 'SectionController')->middleware(['role:registrar']);
-
     Route::get('/periods', 'PeriodController@index')->middleware(['role:admin']);
     Route::post('/periods', 'PeriodController@store')->middleware(['role:admin']);
     Route::get('/periods/create', 'PeriodController@create')->middleware(['role:admin']);
@@ -31,4 +25,16 @@ Route::group(['middleware'=>'auth'], function() {
     Route::get('/periods/{period}', 'PeriodController@edit')->middleware(['role:admin']);
     Route::patch('/periods/{period}', 'PeriodController@update')->middleware(['role:admin']);
     Route::post('/periods/{period}/change-status', 'PeriodController@changeStatus')->middleware(['role:admin']);
+});
+
+Route::group(['middlwares'=>['auth','role:registrar']], function(){
+    Route::get('/students/search', 'StudentController@search');
+    Route::resource('/students', 'StudentController');
+
+    Route::get('/section/search', 'SectionController@search');
+    Route::resource('/sections', 'SectionController');
+
+    Route::post('/enrols', 'EnrolController@store');
+    Route::get("/enrols/{student}", 'EnrolController@enrol');
+    Route::get("/enrols/{student}/show", 'EnrolController@show');
 });

@@ -29,13 +29,13 @@ class Student extends Model
         return $this->hasMany('App\Enrol', 'student_id');
     }
 
-    public function activeEnrolment() {
+    public function getActiveEnrolmentAttribute() {
         // $en = Enrol::with('period')->whereHas('period', function($query) {
         //     $query->where('status','<>','expired');
         // })->where('student_id', $this->id);
 
         $ens = Enrol::with('period')->whereHas('period', function($query) {
-            $query->where('status','<>','expired');
+            $query->whereNotIn('status',['closed','pending','expired']);
         })->where('student_id', $this->id)->first();
 
         return $ens;

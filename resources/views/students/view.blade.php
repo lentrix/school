@@ -45,7 +45,12 @@
     <div class="col">
         <div class="card card-primary" style="height: 100%">
             <div class="card-header">
-                <h3>Enrolment History</h3>
+                <h3>
+                    Enrolment History
+                    <a href='{{url("/enrols/$student->id")}}' class="btn btn-primary float-right" title="Enrol Student">
+                        <i class="fa fa-folder-plus"></i> Enrol
+                    </a>
+                </h3>
             </div>
             <div class="card-body">
 

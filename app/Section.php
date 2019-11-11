@@ -58,12 +58,11 @@ class Section extends Model
             "classes_id IN (SELECT id FROM classes WHERE section_id=$this->id)")->get();
     }
 
-    public static function list(\App\Enrol $enrol) {
+    public static function list() {
         $list = [];
-        foreach(static::where('program_id', $enrol->program_id)->where('level_id', $enrol->level_id)->get() as $section){
-            $list[$section->id] = $section->name;
-        }
 
-        return $list;
+        return static::whereHas('period', function($query){
+                $query->whereNotIn('status',['closed','pending','expired']);
+            })->orderBy('name')->pluck('name','id');
     }
 }
