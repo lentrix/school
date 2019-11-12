@@ -37,10 +37,14 @@
             </div>
         </li>
 
-        <li class="nav-item">
-            <a class="nav-link" href="#">
-              <i class="fa fa-cogs"></i> Utilities
-            </a>
+        <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="utilitiesDropDown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <i class="fa fa-cogs"></i> Utilities
+                </a>
+                <div class="dropdown-menu" aria-labelledby="utilitiesDropDown">
+                    <a class="dropdown-item" href="{{url('/users')}}">Users &amp; Roles</a>
+                    <a class="dropdown-item" href="#">Change Password</a>
+                </div>
         </li>
       </ul>
     </div>
