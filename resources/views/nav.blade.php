@@ -18,8 +18,8 @@
             <div class="dropdown-menu" aria-labelledby="recordsDropDown">
                 <a class="dropdown-item" href="{{url('/departments')}}">Departments</a>
                 <a class="dropdown-item" href="{{url('/programs')}}">Programs</a>
-                <a class="dropdown-item" href="#">Courses</a>
-                <a class="dropdown-item" href="#">Teachers</a>
+                <a class="dropdown-item" href="{{url('/courses')}}">Courses</a>
+                <a class="dropdown-item" href="#">Strands</a>
                 <a class="dropdown-item" href="{{url('/sections')}}">Sections</a>
                 <a class="dropdown-item" href="{{url('/students')}}">Students</a>
                 <a class="dropdown-item" href="{{url('/periods')}}">School Periods</a>
