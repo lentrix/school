@@ -34,7 +34,7 @@ Route::group(['middlwares'=>['auth','role:registrar']], function(){
     Route::get('/section/search', 'SectionController@search');
     Route::resource('/sections', 'SectionController');
 
-    Route::post('/enrols', 'EnrolController@store');
     Route::get("/enrols/{student}", 'EnrolController@enrol');
-    Route::get("/enrols/{student}/show", 'EnrolController@show');
+    Route::post('/enrols', 'EnrolController@store');
+    Route::get("/enrols/{enrol}/show", 'EnrolController@show');
 });

@@ -20,4 +20,8 @@ class Period extends Model
     public function enrols() {
         return $this->hasMany('App\Enrol', 'period_id');
     }
+
+    public static function listActive() {
+        return static::whereNotIn('status',['close','pending'])->pluck('name', 'id');
+    }
 }

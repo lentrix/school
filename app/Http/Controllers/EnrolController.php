@@ -32,7 +32,13 @@ class EnrolController extends Controller
         $lev = Level::find($request['level_id']);
         $strand = Strand::find($request['strand_id']);
 
+        if($prg->category != $lev->category) {
+            return redirect()->back()->with('Error','Invalid Program and Level combination');
+        }
 
+        if($lev->category!='shs' && $strand!=null){
+            return redirect()->back()->with('Error','Only Senior High School have Strands.');
+        }
 
         $enrol = Enrol::create([
             'student_id' => $request['student_id'],
@@ -44,10 +50,10 @@ class EnrolController extends Controller
             'type' => $request['type'],
         ]);
 
-        return redirect("/enrols/$enrol->id")->with('Info','Enrolment transaction completed.');
+        return redirect("/enrols/$enrol->id/show")->with('Info','Enrolment transaction completed.');
     }
 
-    public function show() {
-        return "Hello";
+    public function show(Enrol $enrol) {
+        return view('enrols.view', compact('enrol'));
     }
 }

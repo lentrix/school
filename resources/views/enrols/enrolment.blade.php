@@ -9,6 +9,13 @@
 
         {!! Form::open(['url'=>'/enrols', 'method'=>'post']) !!}
             {{Form::hidden('student_id', $student->id)}}
+
+        <div class="form-group">
+            <?= Form::label('period_id', 'School Period'); ?>
+            <?= Form::select('period_id', \App\Period::listEnrolment(),
+                null,['class'=>'form-control','placeholder'=>'Select a period']); ?>
+        </div>
+
         <div class="form-group">
             {{Form::label('program_id')}}
             {{Form::select('program_id', \App\Program::pluck('name','id'),
@@ -38,18 +45,12 @@
         </div>
 
         <div class="form-group">
-            <?= Form::label('period_id', 'School Period'); ?>
-            <?= Form::select('period_id', \App\Period::listEnrolment(),
-                null,['class'=>'form-control','placeholder'=>'Select a period']); ?>
-        </div>
-
-        <div class="form-group">
             <input type="radio" name="type" value="old" id="old">
             <label for="old">Old Student</label> &nbsp;&nbsp;
             <input type="radio" name="type" value="new" id="new">
-            <label for="old">New Student</label> &nbsp;&nbsp;
+            <label for="new">New Student</label> &nbsp;&nbsp;
             <input type="radio" name="type" value="transferee" id="transferee">
-            <label for="old">Transferee</label> &nbsp;&nbsp;
+            <label for="transferee">Transferee</label> &nbsp;&nbsp;
         </div>
 
         <div class="form-group">

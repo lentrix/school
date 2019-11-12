@@ -10,7 +10,7 @@ class Enrol extends Model
 
 
     public function student() {
-        return $this->belongsTo('App\Student', 'student_id');
+        return $this->belongsTo('App\Student');
     }
 
     public function level() {
