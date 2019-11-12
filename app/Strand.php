@@ -12,7 +12,7 @@ class Strand extends Model
         return $this->hasMany('App\Enrol', 'strand_id');
     }
 
-    public function identityString() {
+    public function getIdentityStringAttribute() {
         return $this->track . " " . $this->strand;
     }
 

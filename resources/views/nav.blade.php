@@ -19,13 +19,14 @@
                 <a class="dropdown-item" href="{{url('/departments')}}">Departments</a>
                 <a class="dropdown-item" href="{{url('/programs')}}">Programs</a>
                 <a class="dropdown-item" href="{{url('/courses')}}">Courses</a>
-                <a class="dropdown-item" href="#">Strands</a>
+                <a class="dropdown-item" href="{{url('/strands')}}">Strands</a>
                 <a class="dropdown-item" href="{{url('/sections')}}">Sections</a>
                 <a class="dropdown-item" href="{{url('/students')}}">Students</a>
                 <a class="dropdown-item" href="{{url('/periods')}}">School Periods</a>
                 <a class="dropdown-item" href="#">Levels</a>
             </div>
         </li>
+
         <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="#" id="transactionDropDown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 <i class="fa fa-handshake"></i> Transactions
@@ -38,13 +39,24 @@
         </li>
 
         <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="#" id="utilitiesDropDown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    <i class="fa fa-cogs"></i> Utilities
-                </a>
-                <div class="dropdown-menu" aria-labelledby="utilitiesDropDown">
-                    <a class="dropdown-item" href="{{url('/users')}}">Users &amp; Roles</a>
-                    <a class="dropdown-item" href="#">Change Password</a>
-                </div>
+            <a class="nav-link dropdown-toggle" href="#" id="reportDropDown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <i class="fa fa-list-alt"></i> Reports
+            </a>
+            <div class="dropdown-menu" aria-labelledby="reportDropDown">
+                <a class="dropdown-item" href="#">Student Listing</a>
+                <a class="dropdown-item" href="#">Student Grade</a>
+                <a class="dropdown-item" href="#">Class List</a>
+            </div>
+        </li>
+
+        <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="utilitiesDropDown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <i class="fa fa-cogs"></i> Utilities
+            </a>
+            <div class="dropdown-menu" aria-labelledby="utilitiesDropDown">
+                <a class="dropdown-item" href="{{url('/users')}}">Users &amp; Roles</a>
+                <a class="dropdown-item" href='{{url("/users/". auth()->user()->id . "/change-password")}}'>Change Password</a>
+            </div>
         </li>
       </ul>
     </div>

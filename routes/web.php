@@ -61,4 +61,7 @@ Route::group(['middlwares'=>['auth','role:registrar']], function(){
 
     Route::get('/courses/search', 'CourseController@search');
     Route::resource('/courses', 'CourseController');
+
+    Route::get('/strands/search', 'StrandController@search');
+    Route::resource('/strands', 'StrandController');
 });
