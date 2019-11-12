@@ -17,7 +17,7 @@
             </a>
             <div class="dropdown-menu" aria-labelledby="recordsDropDown">
                 <a class="dropdown-item" href="{{url('/departments')}}">Departments</a>
-                <a class="dropdown-item" href="#">Programs</a>
+                <a class="dropdown-item" href="{{url('/programs')}}">Programs</a>
                 <a class="dropdown-item" href="#">Courses</a>
                 <a class="dropdown-item" href="#">Teachers</a>
                 <a class="dropdown-item" href="{{url('/sections')}}">Sections</a>

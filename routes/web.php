@@ -55,4 +55,7 @@ Route::group(['middlwares'=>['auth','role:registrar']], function(){
     Route::get("/enrols/{student}", 'EnrolController@enrol');
     Route::post('/enrols', 'EnrolController@store');
     Route::get("/enrols/{enrol}/show", 'EnrolController@show');
+
+    Route::get('/programs/search', 'ProgramController@search');
+    Route::resource('/programs', 'ProgramController');
 });
