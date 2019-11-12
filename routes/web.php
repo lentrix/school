@@ -25,6 +25,9 @@ Route::group(['middleware'=>['auth','role:admin']], function() {
 
     Route::get('/users', 'UserController@index');
     Route::get('/users/search', 'UserController@search');
+
+    Route::resource('/departments', 'DepartmentController');
+    Route::get('/departments/search', 'DepartmentController@search');
 });
 
 Route::group(['middleware'=>'auth'], function() {
