@@ -20,7 +20,7 @@ class Strand extends Model
         $list = [];
 
         foreach(static::orderBy('track')->get() as $strand) {
-            $list[$strand->id] = $strand->identityString();
+            $list[$strand->id] = $strand->identityString;
         }
 
         return $list;

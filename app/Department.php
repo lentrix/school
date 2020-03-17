@@ -17,4 +17,10 @@ class Department extends Model
     public function programs() {
         return $this->hasMany('App\Program', 'dept_id');
     }
+
+    public static function list() {
+        return static::orderBy('name')
+            ->pluck('name','id')
+            ->all();
+    }
 }

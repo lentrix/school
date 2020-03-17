@@ -19,4 +19,10 @@ class Program extends Model
     public function enrols() {
         return $this->hasMany('App\Enrol', 'program_id');
     }
+
+    public static function list() {
+        return static::orderBy('name')
+            ->pluck('name','id')
+            ->all();
+    }
 }

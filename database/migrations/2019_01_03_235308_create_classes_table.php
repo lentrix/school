@@ -19,9 +19,11 @@ class CreateClassesTable extends Migration
             $table->integer('period_id')->unsigned();
             $table->integer('user_id')->unsigned();
             $table->integer('section_id')->unsigned()->nullable();
+            $table->integer('program_id')->unsigned()->nullable();
+            $table->integer('department_id')->unsigned()->nullable();
             $table->float('credit_units');
             $table->float('pay_units');
-            $table->string('scope')->nullable();
+
             $table->foreign('course_id')->references('id')->on('courses');
             $table->foreign('period_id')->references('id')->on('periods');
             $table->foreign('user_id')->references('id')->on('users');

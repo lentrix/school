@@ -33,6 +33,7 @@
             </a>
             <div class="dropdown-menu" aria-labelledby="transactionDropDown">
                 <a class="dropdown-item" href="#">Enrolment</a>
+                <a class="dropdown-item" href="{{url('/classes')}}">Class Offerings</a>
                 <a class="dropdown-item" href="#">Add &amp; Change</a>
                 <a class="dropdown-item" href="#">Withdrawal</a>
             </div>

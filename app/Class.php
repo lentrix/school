@@ -7,7 +7,8 @@ use Illuminate\Database\Eloquent\Model;
 class Classes extends Model
 {
     public $tableName = "classes";
-    public $fillable = ['course_id', 'period_id', 'teacher_id', 'credit_units', 'pay_units','scope'];
+    public $fillable = ['course_id', 'period_id', 'teacher_id', 'credit_units',
+        'pay_units','user_id', 'program_id', 'department_id', 'section_id'];
 
     public function course() {
         return $this->belongsTo('App\Course');
@@ -17,8 +18,16 @@ class Classes extends Model
         return $this->belongsTo('App\Period');
     }
 
-    public function teacher() {
-        return $this->belongsTo('App\Teacher');
+    public function user() {
+        return $this->belongsTo('App\User');
+    }
+
+    public function program() {
+        return $this->belongsTo('App\Program');
+    }
+
+    public function department() {
+        return $this->belongsTo('App\Department');
     }
 
     public function schedules() {

@@ -43,6 +43,8 @@ Route::group(['middleware'=>'auth'], function() {
     Route::patch('/users/{user}', 'UserController@update');
     Route::post('/users', 'UserController@store');
     Route::get('/users/create', 'UserController@create');
+    Route::get('/classes', 'ClassesController@index');
+    Route::get('/classes/{class}/view', 'ClassesController@view');
 });
 
 Route::group(['middlwares'=>['auth','role:registrar']], function(){
@@ -64,4 +66,13 @@ Route::group(['middlwares'=>['auth','role:registrar']], function(){
 
     Route::get('/strands/search', 'StrandController@search');
     Route::resource('/strands', 'StrandController');
+});
+
+Route::group(['middleware'=>['auth','role:dean']], function(){
+    Route::get('/classes/create', 'ClassesController@create');
+    Route::post('/classes', 'ClassesController@store');
+    Route::post('/classes/{class}/add-sched', 'ClassesController@addSched');
+    Route::get('/classes/{class}/edit', 'ClassesController@edit');
+    Route::patch('/classes/{class}', 'ClassesController@update');
+    Route::post('/classes/remove-sched', 'ClassesController@removeSched');
 });

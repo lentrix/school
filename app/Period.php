@@ -24,4 +24,5 @@ class Period extends Model
     public static function listActive() {
         return static::whereNotIn('status',['close','pending'])->pluck('name', 'id');
     }
+
 }
