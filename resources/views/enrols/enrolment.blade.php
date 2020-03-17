@@ -17,7 +17,7 @@
         </div>
 
         <div class="form-group">
-            {{Form::label('program_id')}}
+            {{Form::label('program_id','Program')}}
             {{Form::select('program_id', \App\Program::pluck('name','id'),
                     null,
                     ['class'=>'form-control', 'placeholder'=>'Select program'])}}
@@ -31,14 +31,14 @@
         </div>
 
         <div class="form-group">
-            {{Form::label('strand_id')}}
+            {{Form::label('strand_id','Strand')}}
             {{Form::select('strand_id', \App\Strand::list(),
                     null,
                     ['class'=>'form-control', 'placeholder'=>'Select program'])}}
         </div>
 
         <div class="form-group">
-            {{Form::label('section_id')}}
+            {{Form::label('section_id','Section')}}
             {{Form::select('section_id', \App\Section::list(),
                     null,
                     ['class'=>'form-control', 'placeholder'=>'Select program'])}}
