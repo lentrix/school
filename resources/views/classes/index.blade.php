@@ -35,7 +35,7 @@
             <th>Course</th>
             <th>Description</th>
             <th>Schedule</th>
-            <th>Credit Units</th>
+            <th>Units</th>
             <th>Teacher</th>
         </tr>
     </thead>
@@ -50,7 +50,11 @@
             </td>
             <td>{{$class->course->code}}</td>
             <td>{{$class->course->description}}</td>
-            <td>...</td>
+            <td>
+                @foreach($class->schedules as $index=>$sched)
+                    {!! $index>0?'<br>':'' !!}[{{$sched->fullText}}]
+                @endforeach
+            </td>
             <td>{{$class->credit_units}}</td>
             <td>{{$class->user->fullName}}</td>
         </tr>

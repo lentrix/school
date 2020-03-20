@@ -91,3 +91,7 @@ footer {
     background-color: rgb(19, 25, 34);
     color: #ddd;
 }
+
+.right {
+    text-align: right;
+}

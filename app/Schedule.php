@@ -19,7 +19,7 @@ class Schedule extends Model
     }
 
     public function getFullTextAttribute() {
-        return $this->start . "-" . $this->end . " " . $this->days;
+        return $this->start . "-" . $this->end . " " . $this->days . " " . $this->room->code;
     }
 
     public static function checkClassConflict($start, $end, $days, $room_id) {
