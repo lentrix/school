@@ -18,6 +18,7 @@ class Room extends Model
 
     public static function list() {
         return static::orderBy('name')
+            ->where('active',1)
             ->pluck('name','id');
     }
 }

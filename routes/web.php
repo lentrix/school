@@ -32,6 +32,7 @@ Route::group(['middleware'=>['auth','role:admin']], function() {
     Route::resource('/levels', 'LevelsController');
 
     Route::resource('/venues', 'RoomsController');
+    Route::patch('/venues/{venue}/activate', 'RoomsController@activate');
 });
 
 Route::group(['middleware'=>'auth'], function() {

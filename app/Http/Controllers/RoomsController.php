@@ -111,6 +111,18 @@ class RoomsController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $room = Room::findOrFail($id);
+        $room->active = 0;
+        $room->save();
+
+        return redirect("/venues/$room->id")->with('Info',"This venue has been deactivated.");
+    }
+
+    public function activate($id) {
+        $room = Room::findOrFail($id);
+        $room->active=1;
+        $room->save();
+
+        return redirect("/venues/$room->id")->with('Info','This venue has been reactivated.');
     }
 }

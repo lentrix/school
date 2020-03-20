@@ -17,7 +17,8 @@
             <th>Building</th>
             <th>Floor</th>
             <th>Capacity</th>
-            <th class="right">
+            <th class="center">Active</th>
+            <th class="center">
                 <i class="fa fa-door-open"></i>
             </th>
         </tr>
@@ -31,7 +32,10 @@
             <td>{{$room->building}}</td>
             <td>{{$room->floor}}</td>
             <td>{{$room->capacity}}</td>
-            <td class="right">
+            <td class="center">
+                <i class="fa fa-{{$room->active ? 'check' : 'times'}}"></i>
+            </td>
+            <td class="center">
                 <a href='{{url("/venues/$room->id")}}'>
                     <i class="fa fa-door-open"></i>
                 </a>

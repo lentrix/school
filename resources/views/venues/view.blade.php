@@ -2,6 +2,9 @@
 
 @section('content')
 
+@include('venues._deactivate')
+@include('venues._activate')
+
 <h1>View Venue | {{$room->name}}</h1>
 <nav aria-label="breadcrumb">
     <ol class="breadcrumb">
@@ -16,9 +19,23 @@
             <a href='{{url("/venues/$room->id/edit")}}' class="btn btn-primary" title="Edit">
                 <i class="fa fa-edit"></i>
             </a>
-            <button class="btn btn-danger" title="Deactivate" {{count($schedules)>0 ? 'disabled' : ''}}>
-                <i class="fa fa-times"></i>
-            </button>
+            @if($room->active)
+
+                <button class="btn btn-danger"
+                        title="Deactivate"
+                        data-toggle="modal" data-target="#deactivateModal">
+                    <i class="fa fa-times"></i>
+                </button>
+
+            @else
+
+                <button class="btn btn-info"
+                        title="Activate"
+                        data-toggle="modal" data-target="#activateModal">
+                    <i class="fa fa-check"></i>
+                </button>
+
+            @endif
         </div>
 
         <h2>Venue Details</h2>
@@ -44,6 +61,11 @@
                 <td>{{$room->capacity}}</td>
             </tr>
         </table>
+        @if(!$room->active)
+        <div class="alert alert-danger">
+            This venue is currently inactive.
+        </div>
+        @endif
     </div>
     <div class="col-md-8">
         <h2>Assigned Classes</h2>
