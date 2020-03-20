@@ -31,6 +31,10 @@
                 <td>{{$class->course->description}}</td>
             </tr>
             <tr>
+                <th class="bg-primary text-white">Teacher</th>
+                <td>{{$class->user->fullName}}</td>
+            </tr>
+            <tr>
                 <th class="bg-primary text-white">Section</th>
                 <td>{{$class->section ? $class->section->name : "-"}}</td>
             </tr>

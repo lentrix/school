@@ -48,18 +48,19 @@ class Schedule extends Model
     public static function checkTeacherConflict($start, $end, $days, $teacher_id) {
         $startPlus = Carbon::parse($start)->addMinute()->toTimeString();
         $endMinus = Carbon::parse($end)->subMinute()->toTimeString();
-        foreach(explode(',', $days) as $day) {
-            $qry = Classes::where('teacher_id',$teacher_id)
-                    ->whereHas('period', function($query) {
-                        $query->whereNotIn('status',['pending','expired']);
-                    })->whereHas('schedules', function($query) use ($start, $startPlus, $end, $endMinus, $day) {
-                        $query->where('days','like',"%$day%")
-                              ->whereBetween('start', [$start,$endMinus])
-                              ->orWhereBetween('end',[$startPlus,$end]);
-                    })->with('course')->with('schedules')
-                    ->first();
 
-            if($qry) return $qry;
+        foreach(explode(',', $days) as $day) {
+            $conflict = static::where(function($query) use ($start, $end, $startPlus, $endMinus) {
+                $query->whereBetween('start',[$start, $endMinus])
+                        ->orWhereBetween('end',[$startPlus, $end]);
+            })->where('days', 'like', "%$day%")
+            ->whereHas('class', function($query) use ($teacher_id) {
+                $query->whereHas('period', function($qry) {
+                    $qry->whereNotIn('status', ['close','pending']);
+                })->where('user_id', $teacher_id);
+            })->first();
+
+            if($conflict) return $conflict;
         }
 
         return null;

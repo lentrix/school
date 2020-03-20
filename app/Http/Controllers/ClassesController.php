@@ -82,16 +82,16 @@ class ClassesController extends Controller
 
         $dayStr = implode(',', $request['days']);
 
-        $conflict = Schedule::checkClassConflict(
-            $request['start'], $request['end'],
-            $dayStr, $request['room_id']);
-
-        if($conflict) {
-            $message = "This schedule is in conflict with " . $conflict->class->course->code
-                . " " . $conflict->start . "-" . $conflict->end . " " . $conflict->days
-                . " " . $conflict->room->name;
-
+        if($message=$this->checkClassConflicts(
+                $request['start'], $request['end'],
+                $dayStr, $request['room_id'])) {
             return redirect()->back()->with('Error',$message);
+        }
+
+        if($message=$this->checkTeacherConflicts(
+                $request['start'], $request['end'], $dayStr, $class->user_id))
+        {
+            return redirect()->back()->with('Error', $message);
         }
 
         $schedule = Schedule::create([
@@ -143,5 +143,32 @@ class ClassesController extends Controller
         $sched->delete();
 
         return redirect("/classes/$classId/view")->with('Info','A schedule has been removed.');
+    }
+
+    private function checkClassConflicts($start, $end, $dayStr, $room_id) {
+        $conflict = Schedule::checkClassConflict(
+            $start, $end,
+            $dayStr, $room_id);
+
+        $message = false;
+
+        if($conflict) {
+            $message = "This schedule is in conflict with " . $conflict->class->course->code
+                . " " . $conflict->start . "-" . $conflict->end . " " . $conflict->days
+                . " " . $conflict->room->name;
+        }
+        return $message;
+    }
+
+    private function checkTeacherConflicts($start, $end, $dayStr, $teacher_id) {
+        $conflict = Schedule::checkTeacherConflict($start, $end, $dayStr, $teacher_id);
+        $message = false;
+        if($conflict) {
+            $message = "This schedule is in conflict with teacher "
+            . $conflict->class->user->fullName . " on class "
+            . $conflict->class->course->code . " " . $conflict->start
+            . "-" . $conflict->end . " " . $conflict->days;
+        }
+        return $message;
     }
 }
