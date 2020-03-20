@@ -23,7 +23,7 @@
                 <a class="dropdown-item" href="{{url('/sections')}}">Sections</a>
                 <a class="dropdown-item" href="{{url('/students')}}">Students</a>
                 <a class="dropdown-item" href="{{url('/periods')}}">School Periods</a>
-                <a class="dropdown-item" href="#">Levels</a>
+                <a class="dropdown-item" href="{{url('/levels')}}">Levels</a>
             </div>
         </li>
 
