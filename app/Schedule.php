@@ -26,15 +26,21 @@ class Schedule extends Model
         $startPlus = Carbon::parse($start)->addMinute()->toTimeString();
         $endMinus = Carbon::parse($end)->subMinute()->toTimeString();
         foreach(explode(',', $days) as $day) {
-            $qry = static::whereRaw("start between ? AND ? AND end BETWEEN ? AND ?", [$start,$endMinus,$startPlus,$end])
-                ->whereHas('class', function($query){
-                    $query->whereIn('period_id', DB::table('periods')->where('status','enrolment')->pluck('id'));
-                })
-                ->where('room_id', $room_id)
-                ->where('days','like', "%$day%")
-                ->first();
+            $sched = static::where(function($query) use ($startPlus, $endMinus, $start, $end) {
+                $query->whereBetween('start',[$start,$endMinus])
+                    ->orWhereBetween('end',[$startPlus, $end]);
+            })
+            ->where('days','like',"%$day%")
+            ->where('room_id',$room_id)
+            ->with('class')
+            ->whereHas('class', function($query) {
+                $query->whereHas('period', function($qry){
+                    $qry->whereNotIn('status',['close', 'pending']);
+                })->with('period');
+            })
+            ->first();
 
-            if($qry) return $qry;
+            if($sched) return $sched;
         }
         return null;
     }

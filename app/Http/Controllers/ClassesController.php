@@ -17,6 +17,9 @@ class ClassesController extends Controller
 {
     public function index() {
         $recent = Classes::orderBy('updated_at','desc')
+            ->whereHas('period', function($query){
+                $query->where('status','enrol');
+            })
             ->with('course')
             ->limit(20)->get();
         return view('classes.index',['classes'=>$recent]);
@@ -77,11 +80,25 @@ class ClassesController extends Controller
             'days' => 'required',
         ]);
 
+        $dayStr = implode(',', $request['days']);
+
+        $conflict = Schedule::checkClassConflict(
+            $request['start'], $request['end'],
+            $dayStr, $request['room_id']);
+
+        if($conflict) {
+            $message = "This schedule is in conflict with " . $conflict->class->course->code
+                . " " . $conflict->start . "-" . $conflict->end . " " . $conflict->days
+                . " " . $conflict->room->name;
+
+            return redirect()->back()->with('Error',$message);
+        }
+
         $schedule = Schedule::create([
             'room_id' => $request['room_id'],
             'start' => $request['start'],
             'end' => $request['end'],
-            'days' => $request['days'],
+            'days' => $dayStr,
             'classes_id' => $class->id,
         ]);
 

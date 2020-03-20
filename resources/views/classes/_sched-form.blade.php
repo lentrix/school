@@ -23,8 +23,14 @@
                     </div>
                     <div class="col-sm-6">
                         <div class="form-group">
-                            {{Form::label('days')}}
-                            {{Form::text('days',null,['class'=>'form-control'])}}
+                            {{Form::label('days')}} <br>
+                            {{Form::checkbox('days[]','M',false)}}Mon &nbsp;
+                            {{Form::checkbox('days[]','T',false)}}Tue &nbsp;
+                            {{Form::checkbox('days[]','W',false)}}Wed &nbsp;
+                            {{Form::checkbox('days[]','H',false)}}Thu <br>
+                            {{Form::checkbox('days[]','F',false)}}Fri &nbsp;
+                            {{Form::checkbox('days[]','S',false)}}Sat &nbsp;
+                            {{Form::checkbox('days[]','U',false)}}Sun &nbsp;
                         </div>
                         <div class="form-group">
                             {{Form::label('room_id','Venue')}}
