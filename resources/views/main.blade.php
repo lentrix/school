@@ -35,7 +35,7 @@
 
     <script>
     $(document).ready(function(){
-        $(".alert").delay(10000).fadeOut(1000);
+        // $(".alert").delay(10000).fadeOut(1000);
     })
     </script>
     @yield('scripts')

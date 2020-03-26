@@ -25,6 +25,7 @@ class Schedule extends Model
     public static function checkClassConflict($start, $end, $days, $room_id) {
         $startPlus = Carbon::parse($start)->addMinute()->toTimeString();
         $endMinus = Carbon::parse($end)->subMinute()->toTimeString();
+
         foreach(explode(',', $days) as $day) {
             $sched = static::where(function($query) use ($startPlus, $endMinus, $start, $end) {
                 $query->whereBetween('start',[$start,$endMinus])
@@ -81,4 +82,5 @@ class Schedule extends Model
         return $daysConflict && $timeConflict;
 
     }
+
 }

@@ -38,13 +38,15 @@ class Classes extends Model
         return $this->belongsTo('App\Section');
     }
 
-    public function getScheduleTextAttribute() {
+    public function getScheduleTextAttribute($break=false) {
         if(count($this->schedules)==0) {
             return 'Unscheduled';
         }else {
             $str = "";
-            foreach($this->schedules as $sched) {
-                $str .= "$sched->start-$sched->end $sched->days " . $sched->room->code . " & ";
+            foreach($this->schedules as $index=>$sched) {
+                $breakOrAmp = $break ? "<br>" : " & ";
+                $pre = $index>0 ? $breakOrAmp : "";
+                $str .= $pre . "$sched->start-$sched->end $sched->days " . $sched->room->code;
             }
             return substr($str, 0, strlen($str)-2);
         }

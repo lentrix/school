@@ -8,6 +8,9 @@ use App\Program;
 use App\Level;
 use App\Strand;
 use App\Enrol;
+use App\Classes;
+use App\EnrolClass;
+use Illuminate\Support\Facades\DB;
 
 class EnrolController extends Controller
 {
@@ -55,5 +58,47 @@ class EnrolController extends Controller
 
     public function show(Enrol $enrol) {
         return view('enrols.view', compact('enrol'));
+    }
+
+    public function addClass(Request $request, Enrol $enrol) {
+        $err = [];
+
+        $codes = explode(",", $request['class_codes']);
+
+        foreach($codes as $code) {
+            if($class = Classes::find($code)) {
+                if($conflict = $enrol->checkConflict($class)) {
+
+                    $err[] = str_pad($class->id,5,'0',false) . " " . $class->scheduleText . " is in conflict with "
+                        . $conflict->class->course->code . " " . $conflict->class->scheduleText;
+
+                }else {
+
+                    EnrolClass::create([
+                        'enrol_id'=>$enrol->id,
+                        'class_id'=>$class->id
+                    ]);
+
+                }
+            }else {
+                $err[] = "The code $code cannot be found.";
+            }
+        }
+
+        return redirect()->back()->with('Error', implode("<br>", $err));
+    }
+
+    public function removeClass(Enrol $enrol, Request $request) {
+
+        $class = Classes::find($request['class_id']);
+
+        DB::table('enrol_classes')
+            ->where('enrol_id',$request['enrol_id'])
+            ->where('class_id',$request['class_id'])
+            ->delete();
+
+        return redirect("/enrols/$enrol->id/show")->with('Info',
+                $class->course->code . " " . $class->scheduleText ." has been removed.");
+
     }
 }

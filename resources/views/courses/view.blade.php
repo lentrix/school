@@ -79,7 +79,7 @@
                             &nbsp;
                         </td>
                         <td>
-                            <a href='{{url("/classes/$cls->id")}}' class="btn btn-secondary btn-sm">
+                            <a href='{{url("/classes/$cls->id/view")}}' class="btn btn-secondary btn-sm">
                                 <i class="fa fa-door-open"></i>
                             </a>
                         </td>

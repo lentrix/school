@@ -1,6 +1,6 @@
 @if($message = Session::get('Error'))
     <div class="alert alert-danger">
-        {{$message}}
+        {!!$message!!}
     </div>
 @endif
 

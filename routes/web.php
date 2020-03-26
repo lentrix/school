@@ -62,6 +62,8 @@ Route::group(['middlwares'=>['auth','role:registrar']], function(){
     Route::get("/enrols/{student}", 'EnrolController@enrol');
     Route::post('/enrols', 'EnrolController@store');
     Route::get("/enrols/{enrol}/show", 'EnrolController@show');
+    Route::post("/enrols/{enrol}/add-class", 'EnrolController@addClass');
+    Route::delete("/enrols/{enrol}/remove-class", 'EnrolController@removeClass');
 
     Route::get('/programs/search', 'ProgramController@search');
     Route::resource('/programs', 'ProgramController');
@@ -71,6 +73,7 @@ Route::group(['middlwares'=>['auth','role:registrar']], function(){
 
     Route::get('/strands/search', 'StrandController@search');
     Route::resource('/strands', 'StrandController');
+
 });
 
 Route::group(['middleware'=>['auth','role:dean']], function(){
