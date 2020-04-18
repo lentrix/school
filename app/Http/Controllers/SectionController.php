@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Section;
+use App\Classes;
 
 class SectionController extends Controller
 {
@@ -105,5 +106,31 @@ class SectionController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function addClassesForm(Section $section) {
+        $classes = Classes::where('period_id', $section->period_id)
+            ->whereNull('section_id')
+            ->join('courses', 'courses.id', 'classes.course_id')
+            ->orderBy('courses.code')
+            ->select('classes.*')
+            ->get();
+        return view('sections.add-classes', ['classes'=>$classes, 'section'=>$section]);
+    }
+
+    public function addClasses(Section $section, Request $request) {
+        $count = 0;
+        foreach($request['class_id'] as $index=>$id) {
+            $class = Classes::find($id);
+            if($class) {
+                $class->section_id = $section->id;
+                $class->save();
+                $count++;
+            }else {
+                dd($class, $id);
+            }
+        }
+
+        return redirect("/sections/$section->id/")->with('Info',"$count classes added to this section.");
     }
 }

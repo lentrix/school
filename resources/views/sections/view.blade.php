@@ -7,13 +7,13 @@
 <nav aria-label="breadcrumb">
     <ol class="breadcrumb">
         <li class="breadcrumb-item"><a href="{{url('/sections')}}">Sections</a></li>
-        <li class="breadcrumb-item active" aria-current="page">View Section</li>
+        <li class="breadcrumb-item active" aria-current="page">{{$section->name}}</li>
     </ol>
 </nav>
 
 <div class="row row-eq-height">
     <div class="col">
-        <div class="card card-primary" style="height: 100%">
+        <div class="card card-primary">
             <div class="card-header">
                 <h3>
                     Section Details
@@ -39,7 +39,32 @@
                     <tr>
                         <th>Adviser</th><td>{{$section->user->fullName}}</td>
                     </tr>
+                    <tr>
+                        <th>Period</th><td>{{$section->period->name}}</td>
+                    </tr>
                 </table>
+            </div>
+        </div>
+        <br>
+        <div class="card card-primary">
+            <div class="card-header">
+                <a href='{{url("/sections/$section->id/add-classes")}}'
+                        class="btn btn-primary float-right">
+                    <i class="fa fa-plus"></i> Add
+                </a>
+                <h3>Classes</h3>
+            </div>
+            <div class="card-body">
+                <div class="list-group">
+                @foreach($section->classes as $class)
+
+                    <a href='{{url("/classes/$class->id/view")}}' class="list-group-item list-group-item-action">
+                        <strong>{{$class->course->code}}</strong> | {{$class->course->description}} <br>
+                        {!!$class->getScheduleTextAttribute(1)!!}
+                    </a>
+
+                @endforeach
+                </div>
             </div>
         </div>
     </div>

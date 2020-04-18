@@ -58,9 +58,6 @@ Route::group(['middlwares'=>['auth','role:registrar']], function(){
     Route::get('/students/search', 'StudentController@search');
     Route::resource('/students', 'StudentController');
 
-    Route::get('/section/search', 'SectionController@search');
-    Route::resource('/sections', 'SectionController');
-
     Route::get("/enrols/{student}", 'EnrolController@enrol');
     Route::post("/enrols/create-open", 'EnrolController@createOrOpen');
     Route::post('/enrols', 'EnrolController@store');
@@ -86,4 +83,9 @@ Route::group(['middleware'=>['auth','role:dean']], function(){
     Route::get('/classes/{class}/edit', 'ClassesController@edit');
     Route::patch('/classes/{class}', 'ClassesController@update');
     Route::post('/classes/remove-sched', 'ClassesController@removeSched');
+
+    Route::get('/section/search', 'SectionController@search');
+    Route::resource('/sections', 'SectionController');
+    Route::get('/sections/{section}/add-classes', 'SectionController@addClassesForm');
+    Route::post('/sections/{section}/add-classes', 'SectionController@addClasses');
 });

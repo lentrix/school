@@ -16,12 +16,16 @@
 
 <div class="row">
 
-    <div class="col-md-5">
+    <div class="col-md-6">
         <a href='{{url("/classes/$class->id/edit")}}' class="btn btn-secondary float-right">
             <i class="fa fa-edit"></i> Edit
         </a>
         <h3>Class Details</h3>
         <table class="table table-bordered table-striped">
+            <tr>
+                <th class="bg-primary text-white">Class Code</th>
+                <td>{{str_pad($class->id, 10,'0', STR_PAD_LEFT)}}</td>
+            </tr>
             <tr>
                 <th class="bg-primary text-white">Course Code</th>
                 <td>{{$class->course->code}}</td>
@@ -48,7 +52,7 @@
             </tr>
         </table>
     </div>
-    <div class="col-md-7">
+    <div class="col-md-6">
         <button class="btn btn-secondary float-right" title="Add a schedule"
                 data-toggle="modal" data-target="#schedFormModal">
             <i class="fa fa-plus"></i> Add
