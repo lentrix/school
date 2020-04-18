@@ -41,6 +41,7 @@ Route::group(['middleware'=>'auth'], function() {
     Route::get('/users/{user}/change-password', 'UserController@changePasswordForm');
     Route::post('/users/{user}/change-password', 'UserController@changePassword');
 
+    Route::get('/users/load', 'UserController@showLoad');
     Route::get("/users/{user}", 'UserController@show');
     Route::get('/users/{user}/edit', 'UserController@edit');
     Route::get('/users/{user}/change-password', 'UserController@changePasswordForm');
@@ -48,6 +49,7 @@ Route::group(['middleware'=>'auth'], function() {
     Route::patch('/users/{user}', 'UserController@update');
     Route::post('/users', 'UserController@store');
     Route::get('/users/create', 'UserController@create');
+
     Route::get('/classes', 'ClassesController@index');
     Route::get('/classes/{class}/view', 'ClassesController@view');
 });
@@ -60,6 +62,7 @@ Route::group(['middlwares'=>['auth','role:registrar']], function(){
     Route::resource('/sections', 'SectionController');
 
     Route::get("/enrols/{student}", 'EnrolController@enrol');
+    Route::post("/enrols/create-open", 'EnrolController@createOrOpen');
     Route::post('/enrols', 'EnrolController@store');
     Route::get("/enrols/{enrol}/show", 'EnrolController@show');
     Route::post("/enrols/{enrol}/add-class", 'EnrolController@addClass');

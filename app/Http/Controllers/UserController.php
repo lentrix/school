@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\User;
+use App\Classes;
 
 class UserController extends Controller
 {
@@ -166,5 +167,14 @@ class UserController extends Controller
         }
 
         return redirect("/users/$user->id")->with('Info','The password has been updated.');
+    }
+
+    public function showLoad() {
+        $user = auth()->user();
+        $classes = Classes::where('user_id', $user->id)
+                ->whereHas('period', function($query) use ($user){
+                    $query->whereNotIn('status',['close','pending']);
+                })->with('course')->get();
+        return view('users.load',['user'=>$user,'classes'=>$classes]);
     }
 }

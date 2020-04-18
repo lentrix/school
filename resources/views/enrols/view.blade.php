@@ -9,6 +9,7 @@
 
 <div class="card card-primary">
     <div class="card-header">
+        @if($enrol->period->status=='enrol')
         <div class="float-right">
             @if($enrol->section)
                 <button class="btn btn-danger"><i class="fa fa-times"></i> Section</button>
@@ -16,6 +17,7 @@
                 <button class="btn btn-info"><i class="fa fa-plus"></i> Section</button>
             @endif
         </div>
+        @endif
         <h3>Enrolment Details</h3>
     </div>
     <div class="card-body">
@@ -41,6 +43,7 @@
             </table>
         </div>
         <hr>
+        @if($enrol->period->status=='enrol')
         <div class="float-right">
             <button class="btn btn-primary btn-sm" data-toggle="modal" data-target="#addClassModal">
                 <i class="fa fa-plus"></i> Class
@@ -49,6 +52,7 @@
                 <i class="fa fa-ban"></i> Withdraw
             </button>
         </div>
+        @endif
         <h4>Class Schedule</h4>
         <table class="table table-bordered table-sm">
             <thead>
@@ -59,7 +63,9 @@
                     <th>Units</th>
                     <th>Schedule</th>
                     <th>Teacher</th>
+                    @if($enrol->period->status=='enrol')
                     <th>...</th>
+                    @endif
                 </tr>
             </thead>
             <tbody>
@@ -71,6 +77,7 @@
                     <td>{{$enrolClass->class->credit_units}}</td>
                     <td>{!!$enrolClass->class->getScheduleTextAttribute(true)!!}</td>
                     <td>{{$enrolClass->class->user->fullName}}</td>
+                    @if($enrol->period->status=='enrol')
                     <td>
                         <button class="btn btn-danger btn-sm remove-class"
                                 data-toggle="modal"
@@ -82,6 +89,7 @@
                             <i class="fa fa-times"></i>
                         </button>
                     </td>
+                    @endif
                 </tr>
                 @endforeach
             </tbody>

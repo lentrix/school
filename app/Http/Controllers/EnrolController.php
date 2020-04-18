@@ -101,4 +101,13 @@ class EnrolController extends Controller
                 $class->course->code . " " . $class->scheduleText ." has been removed.");
 
     }
+
+    public function createOrOpen(Request $request) {
+        $stud = Student::find($request['student_id']);
+        if($stud) {
+            return redirect("/enrols/$stud->id");
+        }else {
+            return redirect()->back()->with('Error',"Student ID {$request['student_id']} cannot be found.");
+        }
+    }
 }

@@ -33,7 +33,7 @@
                 <i class="fa fa-handshake"></i> Transactions
             </a>
             <div class="dropdown-menu" aria-labelledby="transactionDropDown">
-                <a class="dropdown-item" href="#">Enrolment</a>
+                <a class="dropdown-item" href="#" data-toggle="modal" data-target="#enrolModal">Enrolment</a>
                 <a class="dropdown-item" href="{{url('/classes')}}">Class Offerings</a>
                 <a class="dropdown-item" href="#">Add &amp; Change</a>
                 <a class="dropdown-item" href="#">Withdrawal</a>
