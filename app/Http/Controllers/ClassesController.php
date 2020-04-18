@@ -94,6 +94,16 @@ class ClassesController extends Controller
             return redirect()->back()->with('Error', $message);
         }
 
+        if($class->section_id != null) {
+
+            $conflict = Schedule::checkSectionConflict($request['start'], $request['end'], $dayStr, $class->section_id);
+            if($conflict) {
+                return redirect()->back()->with(
+                    'Error',
+                    "The new schedule is in conflict with {$conflict->class->course->code} $conflict->fullText within the section {$class->section->name}");
+            }
+        }
+
         $schedule = Schedule::create([
             'room_id' => $request['room_id'],
             'start' => $request['start'],

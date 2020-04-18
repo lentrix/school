@@ -67,6 +67,27 @@ class Schedule extends Model
         return null;
     }
 
+    public static function checkSectionConflict($start, $end, $days, $section_id) {
+        $startPlus = Carbon::parse($start)->addMinute()->toTimeString();
+        $endMinus = Carbon::parse($end)->subMinute()->toTimeString();
+
+        foreach(explode(',', $days) as $day) {
+            $conflict = static::where(function($query) use ($start, $end, $startPlus, $endMinus) {
+                $query->whereBetween('start',[$start, $endMinus])
+                        ->orWhereBetween('end',[$startPlus, $end]);
+            })->where('days', 'like', "%$day%")
+            ->whereHas('class', function($query) use ($section_id) {
+                $query->whereHas('period', function($qry) {
+                    $qry->whereNotIn('status', ['close','pending']);
+                })->where('section_id', $section_id);
+            })->first();
+
+            if($conflict) return $conflict;
+        }
+
+        return null;
+    }
+
     public static function checkTwo(Schedule $sched1, Schedule $sched2) {
         //check days
         $daysConflict = count(

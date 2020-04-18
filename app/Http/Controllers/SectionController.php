@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Section;
 use App\Classes;
+use App\Schedule;
 
 class SectionController extends Controller
 {
@@ -123,6 +124,14 @@ class SectionController extends Controller
         foreach($request['class_id'] as $index=>$id) {
             $class = Classes::find($id);
             if($class) {
+                foreach($class->schedules as $sched) {
+                    $conflict = Schedule::checkSectionConflict($sched->start, $sched->end, $sched->days, $section->id);
+                    if($conflict) {
+                        return redirect()->back()->with(
+                            'Error',
+                            "{$class->course->code} is in conflict with {$conflict->class->course->code} $conflict->fullText");
+                    }
+                }
                 $class->section_id = $section->id;
                 $class->save();
                 $count++;
