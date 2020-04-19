@@ -3,6 +3,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\DB;
 
 class Section extends Model
 {
@@ -77,5 +78,12 @@ class Section extends Model
         }
 
         EnrolClass::insert($data);
+    }
+
+    public static function removeEnrolClasses($enrolId, $sectionId) {
+        DB::table('enrol_classes')
+                ->whereIn('class_id', DB::table('classes')->where('section_id', $sectionId)->pluck('id'))
+                ->where('enrol_id', $enrolId)
+                ->delete();
     }
 }

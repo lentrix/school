@@ -115,4 +115,35 @@ class EnrolController extends Controller
             return redirect()->back()->with('Error',"Student ID {$request['student_id']} cannot be found.");
         }
     }
+
+    public function edit(Enrol $enrol) {
+        return view('enrols.edit', ['enrol'=>$enrol]);
+    }
+
+    public function update(Enrol $enrol, Request $request) {
+        $this->validate($request, [
+            'level_id' => 'required|numeric',
+            'program_id' => 'required|numeric',
+            'period_id' => 'required|numeric',
+            'type' => 'required'
+        ]);
+
+        $sectionId = $enrol->section_id;
+
+        $enrol->update($request->all());
+
+        $sectionMsg = "";
+
+        if($sectionId!=$request['section_id']) {
+            Section::removeEnrolClasses($enrol->id, $sectionId);
+            $sectionMsg = " Classes from previous enrolled section has been removed.";
+            if($request['section_id']!=null) {
+                Section::enrolClasses($enrol->id, $request['section_id']);
+                $sectionMsg .= " Classes from new enrolled section has been added.";
+            }
+        }
+
+        return redirect("/enrols/$enrol->id/show")->with('Info', "Enrolment has been updated.$sectionMsg");
+
+    }
 }

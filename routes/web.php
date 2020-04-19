@@ -64,6 +64,8 @@ Route::group(['middlwares'=>['auth','role:registrar']], function(){
     Route::get("/enrols/{enrol}/show", 'EnrolController@show');
     Route::post("/enrols/{enrol}/add-class", 'EnrolController@addClass');
     Route::delete("/enrols/{enrol}/remove-class", 'EnrolController@removeClass');
+    Route::get('/enrols/{enrol}/edit', 'EnrolController@edit');
+    Route::put('/enrols/{enrol}', 'EnrolController@update');
 
     Route::get('/programs/search', 'ProgramController@search');
     Route::resource('/programs', 'ProgramController');

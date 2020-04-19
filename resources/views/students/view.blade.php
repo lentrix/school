@@ -53,7 +53,28 @@
                 </h3>
             </div>
             <div class="card-body">
-
+                <table class="table table-bordered table-striped">
+                    <thead>
+                        <tr class="bg-primary text-white">
+                            <th>Period</th>
+                            <th>Program</th>
+                            <th>Level</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach($student->enrols as $enrol)
+                        <tr>
+                            <td>
+                                <a href='{{url("/enrols/$enrol->id/show")}}' class="link">
+                                    {{$enrol->period->name}}
+                                </a>
+                            </td>
+                            <td>{{$enrol->program->accronym}}</td>
+                            <td>{{$enrol->level->code}}</td>
+                        </tr>
+                        @endforeach
+                    </tbody>
+                </table>
             </div>
         </div>
     </div>

@@ -9,15 +9,11 @@
 
 <div class="card card-primary">
     <div class="card-header">
-        @if($enrol->period->status=='enrol')
         <div class="float-right">
-            @if($enrol->section)
-                <button class="btn btn-danger"><i class="fa fa-times"></i> Section</button>
-            @else
-                <button class="btn btn-info"><i class="fa fa-plus"></i> Section</button>
-            @endif
+            <a href='{{url("/enrols/$enrol->id/edit")}}' class="btn btn-primary">
+                <i class="fa fa-edit"></i> Edit
+            </a>
         </div>
-        @endif
         <h3>Enrolment Details</h3>
     </div>
     <div class="card-body">
