@@ -65,4 +65,17 @@ class Section extends Model
                 $query->whereNotIn('status',['closed','pending','expired']);
             })->orderBy('name')->pluck('name','id');
     }
+
+    public static function enrolClasses($enrol_id, $section_id) {
+        $classes = Classes::where('section_id', $section_id)->get();
+        $data = [];
+        foreach($classes as $class) {
+            $data[] = [
+                'enrol_id' => $enrol_id,
+                'class_id' => $class->id
+            ];
+        }
+
+        EnrolClass::insert($data);
+    }
 }

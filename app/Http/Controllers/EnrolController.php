@@ -10,6 +10,7 @@ use App\Strand;
 use App\Enrol;
 use App\Classes;
 use App\EnrolClass;
+use App\Section;
 use Illuminate\Support\Facades\DB;
 
 class EnrolController extends Controller
@@ -52,6 +53,10 @@ class EnrolController extends Controller
             'section_id' => $request['section_id'],
             'type' => $request['type'],
         ]);
+
+        if($request['section_id']) {
+            Section::enrolClasses($enrol->id, $request['section_id']);
+        }
 
         return redirect("/enrols/$enrol->id/show")->with('Info','Enrolment transaction completed.');
     }

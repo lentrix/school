@@ -80,7 +80,15 @@
                 </h3>
             </div>
             <div class="card-body">
-                No students enrolled.
+                <div class="list-group">
+                    @foreach($section->enrols as $index=>$enrol)
+
+                    <a href='{{url("/enrols/$enrol->id/show")}}' class="list-group-item list-group-item-action">
+                        {{$index+1}}. {{$enrol->student->fullName}}
+                    </a>
+
+                    @endforeach
+                </div>
             </div>
         </div>
     </div>
