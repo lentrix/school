@@ -37,9 +37,9 @@ class CourseController extends Controller
     public function store(Request $request)
     {
         $this->validate($request, [
-            'code' => 'required',
             'description' => 'required',
             'units' => 'required|numeric',
+            'hours' => 'numeric',
             'academic' => 'required',
         ]);
 
@@ -84,9 +84,9 @@ class CourseController extends Controller
     public function update(Request $request, Course $course)
     {
         $this->validate($request, [
-            'code' => 'required',
             'description' => 'required',
             'units' => 'required|numeric',
+            'hours' => 'numeric',
             'academic' => 'required',
         ]);
 

@@ -6,7 +6,7 @@
 
 @include('classes._remove-sched')
 
-<h1>View Class Offering</h1>
+<h1>View Class</h1>
 <nav aria-label="breadcrumb">
     <ol class="breadcrumb">
         <li class="breadcrumb-item"><a href="{{url('/classes')}}">Class Offerings</a></li>

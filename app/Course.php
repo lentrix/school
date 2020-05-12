@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Course extends Model
 {
-    public $fillable = ['code','description','units','academic','program_id'];
+    public $fillable = ['code', 'type','description','units', 'hours','academic','program_id'];
 
     public function program() {
         return $this->belongsTo('App\Program');
@@ -29,6 +29,14 @@ class Course extends Model
     }
 
     public static function list() {
-        return static::orderBy('description')->pluck('description','id');
+        // return static::orderBy('description')->pluck('description','id');
+        $courses = static::orderBy('description')
+            ->with('program')
+            ->get()
+            ->keyBy('id')
+            ->map(function($item) {
+                return $item->description . " (" . $item->program->accronym . ")";
+            });
+        return $courses;
     }
 }

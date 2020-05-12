@@ -15,9 +15,11 @@ class CreateCoursesTable extends Migration
     {
         Schema::create('courses', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('code')->unique();
+            $table->string('code')->unique()->nullable();
+            $table->string('type', 30)->nullable(); //Core, Applied, Specialized
             $table->string('description');
             $table->float('units');
+            $table->integer('hours')->nullable();
             $table->boolean('academic')->default(1);
             $table->integer('program_id')->unsigned()->nullable();
             $table->foreign('program_id')->references('id')->on('programs');

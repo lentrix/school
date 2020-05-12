@@ -10,6 +10,7 @@
     </ol>
 </nav>
 
+
 {!! Form::open(['url'=>'/classes', 'method'=>'post']) !!}
 
 @include('classes._form')

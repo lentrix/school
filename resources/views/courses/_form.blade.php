@@ -3,12 +3,21 @@
     {{Form::text('code', null, ['class'=>'form-control'])}}
 </div>
 <div class="form-group">
+    {{Form::label('type','Course Type')}}
+    {{Form::select('type',['Core'=>'Core', 'Applied'=>'Applied', 'Specialized'=>'Specialized'],
+        null, ['class'=>'form-control', 'placeholder'=>'Select Course Type'])}}
+</div>
+<div class="form-group">
     {{Form::label('description')}}
     {{Form::text('description', null, ['class'=>'form-control'])}}
 </div>
 <div class="form-group">
     {{Form::label('units')}}
     {{Form::text('units', null, ['class'=>'form-control'])}}
+</div>
+<div class="form-group">
+    {{Form::label('hours')}}
+    {{Form::text('hours', null, ['class'=>'form-control'])}}
 </div>
 <div class="form-group">
     {{Form::label('program_id', 'Program')}}

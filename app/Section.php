@@ -67,6 +67,9 @@ class Section extends Model
             })->orderBy('name')->pluck('name','id');
     }
 
+    /**
+     * Add enrol_classes when changing the section of an enrol
+     */
     public static function enrolClasses($enrol_id, $section_id) {
         $classes = Classes::where('section_id', $section_id)->get();
         $data = [];
@@ -80,10 +83,38 @@ class Section extends Model
         EnrolClass::insert($data);
     }
 
+    /**
+     * Remove enrol_classes when change the section of an enrol
+     */
     public static function removeEnrolClasses($enrolId, $sectionId) {
         DB::table('enrol_classes')
                 ->whereIn('class_id', DB::table('classes')->where('section_id', $sectionId)->pluck('id'))
                 ->where('enrol_id', $enrolId)
                 ->delete();
+    }
+
+    /**
+     * Add enrol_classes when adding a class to a section
+     */
+    public function addSectionEnrolClasses($classId) {
+
+        $enrols = Enrol::where('section_id', $this->id)->get();
+
+        $data = [];
+        foreach($enrols as $enrol) {
+            $data[] = [
+                'enrol_id' => $enrol->id,
+                'class_id' => $classId
+            ];
+        }
+
+        EnrolClass::insert($data);
+    }
+
+    /**
+     * Remove enrol_classes when remove a class from a section
+     */
+    public function removeSectionEnrolClasses($classId) {
+
     }
 }

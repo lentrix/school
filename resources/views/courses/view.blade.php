@@ -30,6 +30,10 @@
                         <td>{{$course->code}}</td>
                     </tr>
                     <tr>
+                        <th class="table-info">Course Type</th>
+                        <td>{{$course->type}}</td>
+                    </tr>
+                    <tr>
                         <th class="table-info">Description</th>
                         <td>{{$course->description}}</td>
                     </tr>

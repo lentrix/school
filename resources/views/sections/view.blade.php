@@ -48,10 +48,7 @@
         <br>
         <div class="card card-primary">
             <div class="card-header">
-                <a href='{{url("/sections/$section->id/add-classes")}}'
-                        class="btn btn-primary float-right">
-                    <i class="fa fa-plus"></i> Add
-                </a>
+
                 <h3>Classes</h3>
             </div>
             <div class="card-body">

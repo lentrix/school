@@ -134,6 +134,7 @@ class SectionController extends Controller
                 }
                 $class->section_id = $section->id;
                 $class->save();
+                $section->addSectionEnrolClasses($class->id);
                 $count++;
             }else {
                 dd($class, $id);
