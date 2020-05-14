@@ -52,6 +52,7 @@ Route::group(['middleware'=>'auth'], function() {
 
     Route::get('/classes', 'ClassesController@index');
     Route::get('/classes/{class}/view', 'ClassesController@view');
+    Route::get('/classes/{class}/attn', 'ClassManagementController@attendance');
 });
 
 Route::group(['middlwares'=>['auth','role:registrar']], function(){

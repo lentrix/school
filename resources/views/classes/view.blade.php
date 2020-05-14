@@ -97,6 +97,33 @@
 
 <h2>Students List</h2>
 
+<table class="table table-bordered table-striped table-sm">
+    <thead>
+        <th>Last Name</th>
+        <th>First Name</th>
+        <th>Middle Name</th>
+        <th>#</th>
+    </thead>
+    <tbody>
+        @foreach($class->enrolClasses() as $enc)
+
+        <tr>
+            <td>{{$enc->enrol->student->lname}}</td>
+            <td>{{$enc->enrol->student->fname}}</td>
+            <td>{{$enc->enrol->student->mname}}</td>
+            <td>
+                <a href='{{url("/students/{$enc->enrol->student_id}")}}' class="btn btn-info btn-sm" title="Student Information">
+                    <i class="fa fa-info"></i>
+                </a>
+                <a href='{{url("/enrols/{$enc->enrol->id}/show")}}' class="btn btn-primary btn-sm" title="Enrolment File">
+                    <i class="fa fa-file"></i>
+                </a>
+            </td>
+        </tr>
+
+        @endforeach;
+    </tbody>
+</table>
 @stop
 
 

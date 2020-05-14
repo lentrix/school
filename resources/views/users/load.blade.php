@@ -13,7 +13,7 @@
 
 <table class="table table-bordered table-striped">
     <thead>
-        <tr class="bg-primary text-white">
+        <tr class="bg-secondary text-dark">
             <th>Schedule</th>
             <th>Code</th>
             <th>Description</th>
@@ -31,6 +31,9 @@
             <td>
                 <a href='{{url("/classes/$class->id/view")}}' class="btn btn-secondary btn-sm">
                     <i class="fa fa-door-open"></i>
+                </a>
+                <a href='{{url("/classes/$class->id/attn")}}' class="btn btn-primary btn-sm" title="Class Attendance">
+                    <i class="fa fa-tasks"></i>
                 </a>
             </td>
         </tr>

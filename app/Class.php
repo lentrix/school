@@ -52,9 +52,15 @@ class Classes extends Model
         }
     }
 
-    public function getStudentList() {
-        return Enrol::whereHas('enrolClasses', function($query){
-            $query->where('class_id', $this->id);
-        })->with('student')->get();
+    public function enrolClasses($gender=null) {
+        return EnrolClass::where('class_id', $this->id)
+            ->whereHas('enrol', function($q1) use ($gender) {
+                $q1->join('students','students.id','enrols.student_id')
+                    ->orderBy('lname')->orderBy('fname')
+                    ->with('students');
+                if($gender) {
+                    $q1->where('gender', $gender);
+                }
+            })->get();
     }
 }

@@ -25,4 +25,8 @@ class Strand extends Model
 
         return $list;
     }
+
+    public function identityString() {
+        return $this->track . " " . $this->strand;
+    }
 }
