@@ -52,7 +52,11 @@ Route::group(['middleware'=>'auth'], function() {
 
     Route::get('/classes', 'ClassesController@index');
     Route::get('/classes/{class}/view', 'ClassesController@view');
-    Route::get('/classes/{class}/attn', 'ClassManagementController@attendance');
+    Route::get('/classes/{class}/attn/create', 'ClassManagementController@createAttendance');
+    Route::get('/classes/{class}/attn/{month}', 'ClassManagementController@attendance');
+    Route::get('/attn/{attn}/edit', 'ClassManagementController@editAttendance');
+    Route::post('/attn/{attn}/update', 'ClassManagementController@updateAttendance');
+    Route::delete('/attn/{attn}', 'ClassManagementController@deleteAttendance');
 });
 
 Route::group(['middlwares'=>['auth','role:registrar']], function(){

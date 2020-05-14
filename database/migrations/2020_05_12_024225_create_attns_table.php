@@ -17,7 +17,7 @@ class CreateAttnsTable extends Migration
             $table->bigIncrements('id');
             $table->bigInteger('classes_id')->unsigned();
             $table->string('remarks')->nullable();
-            $table->timestamps();
+            $table->date('date');
             $table->foreign('classes_id')->references('id')->on('classes');
         });
     }
