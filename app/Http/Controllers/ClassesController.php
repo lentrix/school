@@ -13,7 +13,6 @@ use App\EnrolClass;
 use App\User;
 use App\Schedule;
 use App\Room;
-use CreateEnrolClassesTable;
 use Illuminate\Support\Facades\DB;
 
 class ClassesController extends Controller
