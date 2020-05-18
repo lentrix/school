@@ -2,6 +2,8 @@
 
 @section('content')
 
+<?php $monthStr = ['','January','February','March','April','May','June','July','August','September','October','November','December']; ?>
+
 <div class="float-right">
     <a href='{{url("/classes/$class->id/attn/create")}}' class="btn btn-primary">
         <i class="fa fa-plus"></i> New
@@ -11,6 +13,15 @@
 <h1>Class Attendance</h1>
 <div style="font-size: 1.2em; font-weight: bold; border: 1px solid #aaa; padding: 5px; margin-bottom: 10px;">
     {{$class->course->description}} | {{$class->scheduleText}}
+
+    <div class="float-right" style="font-size: 0.8em">
+        <label for="month">Month:</label>
+        <select name="month" id="month">
+            @foreach($months as $m)
+                <option value="{{$m->month}}" {{$month==$m->month ? "selected":""}}>{{$monthStr[$m->month]}}</option>
+            @endforeach
+        </select>
+    </div>
 </div>
 
 <?php $cols = count($attns); ?>
@@ -19,7 +30,7 @@
     <thead class="bg-dark text-white">
         <tr>
             <th rowspan="3" class="center">Students</th>
-            <th colspan="{{$cols}}" class="center">May</th>
+            <th colspan="{{$cols}}" class="center">{{$monthStr[$month]}}</th>
         </tr>
         <tr class="center">
             @foreach($attns as $attn)
@@ -68,4 +79,17 @@
         @endforeach
     </tbody>
 </table>
+@stop
+
+@section('scripts')
+
+<script>
+    $(document).ready(function(){
+        $("#month").change(function(evt){
+            var value = evt.target.selectedOptions[0].value;
+            window.location='{{url("/classes/$class->id/attn")}}' + "/" + value;
+        })
+    })
+</script>
+
 @stop

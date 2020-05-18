@@ -72,7 +72,7 @@
     <i class="fa fa-times"></i> Delete
 </button>
 
-<?php $mo = date('m', strtotime($attn->date)); ?>
+<?php $mo = date('m', strtotime($attn->date))*1; ?>
 
 <a href='{{url("/classes/{$attn->classes_id}/attn/$mo")}}' class="btn btn-secondary">Back</a>
 

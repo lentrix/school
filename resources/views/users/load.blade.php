@@ -32,7 +32,7 @@
                 <a href='{{url("/classes/$class->id/view")}}' class="btn btn-secondary btn-sm">
                     <i class="fa fa-door-open"></i>
                 </a>
-                <a href='{{url("/classes/$class->id/attn")}}/{{date('m')}}' class="btn btn-primary btn-sm" title="Class Attendance">
+                <a href='{{url("/classes/$class->id/attn")}}/{{date('m')*1}}' class="btn btn-primary btn-sm" title="Class Attendance">
                     <i class="fa fa-tasks"></i>
                 </a>
             </td>

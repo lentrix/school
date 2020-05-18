@@ -18,11 +18,14 @@ class ClassManagementController extends Controller
             redirect()->back()->with('Error', 'Sorry you are not the teacher of this class.');
         }
 
-        $attns = Attn::whereMonth('date', date('m'))
+        $attns = Attn::whereMonth('date', $month)
             ->where('classes_id', $class->id)
+            ->orderBy('date')
             ->get();
 
-        return view('classes.attendance', ['class' => $class, 'attns' => $attns]);
+        $months = DB::select( DB::raw("SELECT DISTINCT( MONTH(date) ) AS 'month' FROM attns WHERE classes_id=$class->id") );
+
+        return view('classes.attendance', ['class' => $class, 'attns' => $attns, 'months'=>$months,'month'=>$month]);
     }
 
     public function createAttendance(Classes $class)
@@ -82,7 +85,7 @@ class ClassManagementController extends Controller
             DB::table('attn_checks')->where('id', $id)->update(['att' => $att]);
         }
 
-        $m = date('m');
+        $m = date('m')*1;
         return redirect("/classes/$attn->classes_id/attn/$m");
     }
 
