@@ -35,21 +35,26 @@
         </table>
     </div>
     <div class="col-md-7">
+        <div class="float-right">
+            <a href='{{url("/attn/$attn->id/sync")}}' class="btn btn-secondary">
+                <i class="fa fa-sync-alt"></i> Sync
+            </a>
+        </div>
         <h2>Students</h2>
         <ul class="list-group">
-            @foreach($attn->attnChecks as $attnCheck)
+            @foreach($list as $item)
             <li class="list-group-item">
-                {{$attnCheck->enrol->student->lname}}, {{$attnCheck->enrol->student->fname}}
+                {{$item->lname}}, {{$item->fname}}
                 <span class="float-right">
 
-                    {{Form::radio("attn[$attnCheck->id]",'pr', $attnCheck->att=='pr',['id'=>"pr_$attnCheck->id"])}}
-                    {{Form::label("pr_$attnCheck->id",'Present')}}
+                    {{Form::radio("attn[$item->id]",'pr', $item->att=='pr',['id'=>"pr_$item->id"])}}
+                    {{Form::label("pr_$item->id",'Present')}}
 
-                    {{Form::radio("attn[$attnCheck->id]",'lt', $attnCheck->att=='lt',['id'=>"lt_$attnCheck->id"])}}
-                    {{Form::label("lt_$attnCheck->id",'Late')}}
+                    {{Form::radio("attn[$item->id]",'lt', $item->att=='lt',['id'=>"lt_$item->id"])}}
+                    {{Form::label("lt_$item->id",'Late')}}
 
-                    {{Form::radio("attn[$attnCheck->id]",'ab', $attnCheck->att=='ab',['id'=>"ab_$attnCheck->id"])}}
-                    {{Form::label("ab_$attnCheck->id",'Absent')}}
+                    {{Form::radio("attn[$item->id]",'ab', $item->att=='ab',['id'=>"ab_$item->id"])}}
+                    {{Form::label("ab_$item->id",'Absent')}}
                 </span>
             </li>
             @endforeach
@@ -66,6 +71,10 @@
 <button class="btn btn-danger btn-lg" data-target="#deleteAttendanceModal" type="button" data-toggle="modal">
     <i class="fa fa-times"></i> Delete
 </button>
+
+<?php $mo = date('m', strtotime($attn->date)); ?>
+
+<a href='{{url("/classes/{$attn->classes_id}/attn/$mo")}}' class="btn btn-secondary">Back</a>
 
 {!! Form::close() !!}
 @stop

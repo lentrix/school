@@ -9,9 +9,12 @@ use App\Period;
 use App\Section;
 use App\Program;
 use App\Department;
+use App\EnrolClass;
 use App\User;
 use App\Schedule;
 use App\Room;
+use CreateEnrolClassesTable;
+use Illuminate\Support\Facades\DB;
 
 class ClassesController extends Controller
 {
@@ -180,5 +183,20 @@ class ClassesController extends Controller
             . "-" . $conflict->end . " " . $conflict->days;
         }
         return $message;
+    }
+
+    public function sectionSync(Classes $class) {
+        $missing = DB::table('enrols')->where('section_id', $class->section_id)
+            ->whereNotIn('id', DB::table('enrol_classes')->where('class_id', $class->id)->pluck('enrol_id'))
+            ->pluck('id');
+
+        foreach($missing as $item) {
+            EnrolClass::create([
+                'enrol_id' => $item,
+                'class_id' => $class->id
+            ]);
+        }
+
+        return redirect("/classes/$class->id/view")->with('Info','This class has been synced with its section.');
     }
 }

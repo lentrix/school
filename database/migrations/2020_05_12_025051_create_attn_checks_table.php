@@ -20,7 +20,7 @@ class CreateAttnChecksTable extends Migration
             $table->string('att',2)->default('pr'); //Present (pr), Absent(ab), Late(lt), Excused(ex)
             $table->timestamps();
             $table->foreign('attn_id')->references('id')->on('attns')->onDelete('cascade');
-            $table->foreign('enrol_id')->references('enrol_id')->on('enrol_classes');
+            $table->foreign('enrol_id')->references('enrol_id')->on('enrol_classes')->onDelete('cascade');
         });
     }
 

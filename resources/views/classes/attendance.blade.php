@@ -47,7 +47,7 @@
             @foreach($attns as $attn)
             <td class="center">
                 <?php $check = \App\AttnCheck::get($attn->id, $en->enrol_id)?>
-                <i class="fa {{$symbol[$check->att]}}"></i>
+                @if($check) <i class="fa {{$symbol[$check->att]}}"></i> @endif
             </td>
             @endforeach
         </tr>
@@ -61,7 +61,7 @@
             @foreach($attns as $attn)
             <td class="center">
                 <?php $check = \App\AttnCheck::get($attn->id, $en->enrol_id)?>
-                <i class="fa {{$symbol[$check->att]}}"></i>
+                @if($check) <i class="fa {{$symbol[$check->att]}}"></i> @endif
             </td>
             @endforeach
         </tr>

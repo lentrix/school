@@ -143,4 +143,6 @@ class SectionController extends Controller
 
         return redirect("/sections/$section->id/")->with('Info',"$count classes added to this section.");
     }
+
+
 }

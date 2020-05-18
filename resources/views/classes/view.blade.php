@@ -95,6 +95,14 @@
 
 <hr>
 
+@if($class->section_id)
+<div class="float-right">
+    <a href='{{url("/classes/$class->id/section-sync")}}' class="btn btn-secondary">
+        <i class="fa fa-sync-alt"></i> Sync Section
+    </a>
+</div>
+@endif
+
 <h2>Students List</h2>
 
 <table class="table table-bordered table-striped table-sm">
