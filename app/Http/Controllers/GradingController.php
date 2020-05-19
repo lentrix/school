@@ -8,6 +8,6 @@ use Illuminate\Http\Request;
 class GradingController extends Controller
 {
     public function index(Classes $class) {
-
+        return view('classes.grading', ['class'=>$class]);
     }
 }

@@ -98,7 +98,7 @@ class AttendanceController extends Controller
 
         $attn->delete();
 
-        $m = date('m');
+        $m = date('m')*1;
         return redirect("/classes/$attn->classes_id/attn/$m")->with('Info', 'Attendance record has been deleted.');
     }
 
