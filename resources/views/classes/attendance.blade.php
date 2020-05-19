@@ -2,6 +2,13 @@
 
 @section('content')
 
+<nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item"><a href='{{url("/users/load")}}'>Teaching Load</a></li>
+      <li class="breadcrumb-item active" aria-current="page">Class Attendance</li>
+    </ol>
+</nav>
+
 <?php $monthStr = ['','January','February','March','April','May','June','July','August','September','October','November','December']; ?>
 
 <div class="float-right">

@@ -9,7 +9,7 @@ use App\Classes;
 use App\EnrolClass;
 use Illuminate\Support\Facades\DB;
 
-class ClassManagementController extends Controller
+class AttendanceController extends Controller
 {
     public function attendance(Classes $class, $month)
     {

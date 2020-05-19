@@ -52,13 +52,14 @@ Route::group(['middleware'=>'auth'], function() {
 
     Route::get('/classes', 'ClassesController@index');
     Route::get('/classes/{class}/view', 'ClassesController@view');
+    Route::get('/classes/{class}/columns', 'GradingController@index');
     Route::get('/classes/{class}/section-sync', 'ClassesController@sectionSync');
-    Route::get('/classes/{class}/attn/create', 'ClassManagementController@createAttendance');
-    Route::get('/classes/{class}/attn/{month}', 'ClassManagementController@attendance');
-    Route::get('/attn/{attn}/edit', 'ClassManagementController@editAttendance');
-    Route::post('/attn/{attn}/update', 'ClassManagementController@updateAttendance');
-    Route::get('/attn/{attn}/sync', 'ClassManagementController@syncAttendance');
-    Route::delete('/attn/{attn}', 'ClassManagementController@deleteAttendance');
+    Route::get('/classes/{class}/attn/create', 'AttendanceController@createAttendance');
+    Route::get('/classes/{class}/attn/{month}', 'AttendanceController@attendance');
+    Route::get('/attn/{attn}/edit', 'AttendanceController@editAttendance');
+    Route::post('/attn/{attn}/update', 'AttendanceController@updateAttendance');
+    Route::get('/attn/{attn}/sync', 'AttendanceController@syncAttendance');
+    Route::delete('/attn/{attn}', 'AttendanceController@deleteAttendance');
 });
 
 Route::group(['middlwares'=>['auth','role:registrar']], function(){

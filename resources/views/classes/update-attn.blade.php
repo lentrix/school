@@ -5,6 +5,14 @@
 
 @include("classes._delete_attn")
 
+<nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item"><a href='{{url("/users/load")}}'>Teaching Load</a></li>
+      <li class="breadcrumb-item"><a href='{{url("/classes/$attn->classes_id/attn/" . date('m')*1)}}'>Class Attendance</a></li>
+      <li class="breadcrumb-item active" aria-current="page">Attendance Check</li>
+    </ol>
+</nav>
+
 <h1>Attendance Check</h1>
 <div style="font-size: 1.2em; font-weight: bold; border: 1px solid #aaa; padding: 5px; margin-bottom: 10px;">
     {{$attn->class->course->description}} | {{$attn->class->scheduleText}}

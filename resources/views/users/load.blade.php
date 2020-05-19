@@ -29,11 +29,14 @@
             <td>{{$class->course->description}}</td>
             <td>{{$class->credit_units}}</td>
             <td>
-                <a href='{{url("/classes/$class->id/view")}}' class="btn btn-secondary btn-sm">
+                <a href='{{url("/classes/$class->id/view")}}' class="btn btn-success btn-sm" title="View Class">
                     <i class="fa fa-door-open"></i>
                 </a>
                 <a href='{{url("/classes/$class->id/attn")}}/{{date('m')*1}}' class="btn btn-primary btn-sm" title="Class Attendance">
                     <i class="fa fa-tasks"></i>
+                </a>
+                <a href='{{url("/classes/$class->id/columns")}}' class="btn btn-info btn-sm" title="Class Scoring">
+                    <i class="fa fa-columns"></i>
                 </a>
             </td>
         </tr>
