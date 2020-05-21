@@ -54,6 +54,12 @@ Route::group(['middleware'=>'auth'], function() {
     Route::get('/classes/{class}/view', 'ClassesController@view');
     Route::get('/classes/{class}/columns', 'GradingController@index');
     Route::get('/classes/{class}/section-sync', 'ClassesController@sectionSync');
+    Route::get('/classes/{class}/grade-settings', 'GradingController@gradeSettings');
+    Route::post('/classes/{class}/delete-type', 'GradingController@deleteType');
+    Route::post('/classes/{class}/add-type', 'GradingController@addType');
+    Route::post('/classes/{class}/add-column', 'GradingController@create');
+    Route::get('/columns/{column}', 'GradingController@edit');
+    Route::patch('/columns/{column}', 'GradingController@update');
     Route::get('/classes/{class}/attn/create', 'AttendanceController@createAttendance');
     Route::get('/classes/{class}/attn/{month}', 'AttendanceController@attendance');
     Route::get('/attn/{attn}/edit', 'AttendanceController@editAttendance');

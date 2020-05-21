@@ -3,6 +3,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\DB;
 
 class Classes extends Model
 {
@@ -38,6 +39,10 @@ class Classes extends Model
         return $this->belongsTo('App\Section');
     }
 
+    public function colTypes() {
+        return $this->hasMany('App\ColType','class_id');
+    }
+
     public function getScheduleTextAttribute($break=false) {
         if(count($this->schedules)==0) {
             return 'Unscheduled';
@@ -53,14 +58,32 @@ class Classes extends Model
     }
 
     public function enrolClasses($gender=null) {
-        return EnrolClass::where('class_id', $this->id)
-            ->whereHas('enrol', function($q1) use ($gender) {
-                $q1->join('students','students.id','enrols.student_id')
-                    ->orderBy('lname')->orderBy('fname')
-                    ->with('students');
-                if($gender) {
-                    $q1->where('gender', $gender);
-                }
-            })->get();
+        // return EnrolClass::where('class_id', $this->id)
+        //     ->whereHas('enrol', function($q1) use ($gender) {
+        //         $q1->join('students','students.id','enrols.student_id')
+        //             ->orderByRaw('lname, fname')
+        //             ->with('students');
+        //         if($gender) {
+        //             $q1->where('gender', $gender);
+        //         }
+        //     })->get();
+        $q = DB::table('enrol_classes')->where('class_id', $this->id)
+            ->join('enrols', 'enrols.id','enrol_classes.enrol_id')
+            ->join('students', 'students.id', 'enrols.student_id')
+            ->orderByRaw('lname, fname');
+
+        if($gender) {
+            $q->where('gender', $gender);
+        }
+
+        return $q->get();
+    }
+
+    public function recentColumn() {
+        $col = Column::whereHas('colType', function($q) {
+            $q->where('class_id', $this->id);
+        })->orderBy('date','desc')->first();
+
+        return $col;
     }
 }

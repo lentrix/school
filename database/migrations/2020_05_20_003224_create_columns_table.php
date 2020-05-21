@@ -15,8 +15,12 @@ class CreateColumnsTable extends Migration
     {
         Schema::create('columns', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->bigInteger('classes_id')->unsigned();
-            $table->timestamps();
+            $table->string('title')->nullable();
+            $table->string('term',2);
+            $table->integer('score')->unsigned()->nullable();
+            $table->timestamp('date')->nullable();
+            $table->bigInteger('type_id')->unsigned();
+            $table->foreign('type_id')->references('id')->on('col_types')->onDelete('cascade');
         });
     }
 

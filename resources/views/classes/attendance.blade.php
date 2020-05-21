@@ -61,7 +61,7 @@
 
         @foreach($class->enrolClasses('male') as $en)
         <tr>
-            <td><strong>{{$en->enrol->student->lname}}, {{$en->enrol->student->fname}}</strong></td>
+            <td><strong>{{$en->lname}}, {{$en->fname}}</strong></td>
             @foreach($attns as $attn)
             <td class="center">
                 <?php $check = \App\AttnCheck::get($attn->id, $en->enrol_id)?>
@@ -75,7 +75,7 @@
         </tr>
         @foreach($class->enrolClasses('female') as $en)
         <tr>
-            <td><strong>{{$en->enrol->student->lname}}, {{$en->enrol->student->fname}}</strong></td>
+            <td><strong>{{$en->lname}}, {{$en->fname}}</strong></td>
             @foreach($attns as $attn)
             <td class="center">
                 <?php $check = \App\AttnCheck::get($attn->id, $en->enrol_id)?>
