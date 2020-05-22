@@ -89,7 +89,7 @@ class GradingController extends Controller
             DB::table('scores')->where('id', $id)->update(['score'=>$score]);
         }
 
-        return redirect("/classes/{$column->colType->class_id}/columns")->with('Info','The scores and column details have been saved');
+        return redirect("/classes/{$column->colType->class_id}/columns?term=" . $column->term)->with('Info','The scores and column details have been saved');
     }
 
     private function getTerms($class) {
@@ -122,5 +122,26 @@ class GradingController extends Controller
         }
 
         return $urlTerm;
+    }
+
+    public function viewType(ColType $type) {
+        $urlTerm = $this->getTerm($type->class);
+
+        $cols = $type->columns($urlTerm)->get();
+
+        $scores = [];
+        foreach($cols as $col ) {
+            $scores[$col->id] = $col->scoresForEditing($urlTerm);
+        }
+
+        // dd($scores);
+
+        return view('classes.view-type', [
+            'urlTerm' => $urlTerm,
+            'terms' => $this->getTerms($type->class),
+            'type' => $type,
+            'cols' => $cols,
+            'scores' => $scores,
+        ]);
     }
 }

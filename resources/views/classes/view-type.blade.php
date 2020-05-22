@@ -1,6 +1,5 @@
 @extends('main')
 
-
 @section('content')
 
 <!-- Modal -->
@@ -13,7 +12,7 @@
                 <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            {!! Form::open(['url'=>"/classes/$class->id/add-column", 'method'=>'post']) !!}
+            {!! Form::open(['url'=>"/classes/$type->class_id/add-column", 'method'=>'post']) !!}
             <div class="modal-body">
                 <div class="form-group">
                     {{Form::label('term')}}
@@ -25,7 +24,7 @@
                 </div>
                 <div class="form-group">
                     {{Form::label("type_id", 'Column Type')}}
-                    {{Form::select('type_id',$class->colTypes->pluck('name','id'),null,['class'=>'form-control'])}}
+                    {{Form::select('type_id',$type->class->colTypes->pluck('name','id'),$type->id,['class'=>'form-control'])}}
                 </div>
                 <div class="form-group">
                     {{Form::label('date')}}
@@ -48,12 +47,13 @@
 <nav aria-label="breadcrumb">
     <ol class="breadcrumb">
         <li class="breadcrumb-item"><a href='{{url("/users/load")}}'>Teaching Load</a></li>
+        <li class="breadcrumb-item"><a href='{{url("/classes/$type->class_id/columns")}}?term={{$urlTerm}}'>Class Grading</a></li>
         <li class="breadcrumb-item active" aria-current="page">Class Grading</li>
     </ol>
 </nav>
 
 <div class="float-right">
-    <a href='{{url("/classes/$class->id/grade-settings")}}' class="btn btn-success">
+    <a href='{{url("/classes/$type->class_id/grade-settings")}}' class="btn btn-success">
         <i class="fa fa-cog"></i> Grade Settings
     </a>
     <button class="btn btn-primary" data-target="#addColumnModal" data-toggle="modal">
@@ -65,7 +65,7 @@
 
 <div style="font-size: 1.2em; font-weight: bold; border: 1px solid #aaa; padding: 5px; margin-bottom: 10px;">
 
-    {{$class->course->description}} | {{$class->scheduleText}}
+    {{$type->class->course->description}} | {{$type->class->scheduleText}}
     <div class="float-right" style="font-size: 0.8em">
         <label for="term">Select Term: </label>
         <select name="term" id="term_select">
@@ -81,34 +81,39 @@
         <tr>
             <th rowspan="2">#</th>
             <th rowspan="2">Student</th>
-            <th colspan="{{count($class->colTypes)}}" class="center">
-                {{$urlTerm ? $terms[$urlTerm] : "No Term"}} : Summary
+            <th colspan="{{count($cols)}}" class="center">
+                {{$terms[$urlTerm]}} : {{$type->name}}
             </th>
         </tr>
         <tr>
-            @foreach($class->colTypes as $type)
+            @foreach($cols as $col)
             <th class="center">
-                <a href='{{url("/types/$type->id")}}?term={{$urlTerm}}' class="link">{{$type->name}}</a>
+                <a href='{{url("/columns/$col->id")}}' class="link">
+                    {{$col->title}} ({{$col->score}})
+                </a>
             </th>
             @endforeach
         </tr>
     </thead>
     <tbody>
-        @foreach($class->enrolClasses() as $index=>$enrolClass)
+        @foreach($type->class->enrolClasses() as $i=>$en)
+
         <tr>
-            <td>{{$index+1}}</td>
-            <td>{{$enrolClass->lname}}, {{$enrolClass->fname}}</td>
-            @foreach($class->ColTypes as $type)
-            <td class="center">
-                {{isset($totals[$type->id][$enrolClass->enrol_id]) ? $totals[$type->id][$enrolClass->enrol_id] : "-"}}
-            </td>
+            <td>{{$i+1}}</td>
+            <td>{{$en->lname}}, {{$en->fname}}</td>
+            @foreach($scores as $idx=>$scoreSet)
+                <td class="center">
+                    {{$scoreSet[$i]->score}}
+                </td>
             @endforeach
         </tr>
+
         @endforeach
     </tbody>
 </table>
 
 @stop
+
 
 @section('scripts')
 
@@ -116,7 +121,7 @@
     $(document).ready(function(){
         $("#term_select").change(function(evt){
             var term = $("#term_select option:selected").val();
-            if(term) window.location = '{{url("/classes/$class->id/columns")}}' + '?term=' + term;
+            if(term) window.location = '{{url("/types/$type->id")}}' + '?term=' + term;
         })
     })
 </script>

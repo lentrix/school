@@ -30,4 +30,5 @@ class Column extends Model
                 ->orderBy('lname')->orderBy('fname')
                 ->get();
     }
+
 }

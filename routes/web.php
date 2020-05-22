@@ -66,6 +66,7 @@ Route::group(['middleware'=>'auth'], function() {
     Route::post('/attn/{attn}/update', 'AttendanceController@updateAttendance');
     Route::get('/attn/{attn}/sync', 'AttendanceController@syncAttendance');
     Route::delete('/attn/{attn}', 'AttendanceController@deleteAttendance');
+    Route::get('/types/{type}', 'GradingController@viewType');
 });
 
 Route::group(['middlwares'=>['auth','role:registrar']], function(){

@@ -14,7 +14,11 @@ class ColType extends Model
         return $this->belongsTo('App\Classes');
     }
 
-    public function columns() {
-        return $this->hasMany('App\Column');
+    public function columns($term=null) {
+        $q = $this->hasMany('App\Column','type_id');
+        if($term) {
+            $q->where('term', $term);
+        }
+        return $q;
     }
 }
