@@ -48,7 +48,7 @@
     <ol class="breadcrumb">
         <li class="breadcrumb-item"><a href='{{url("/users/load")}}'>Teaching Load</a></li>
         <li class="breadcrumb-item"><a href='{{url("/classes/$type->class_id/columns")}}?term={{$urlTerm}}'>Class Grading</a></li>
-        <li class="breadcrumb-item active" aria-current="page">Class Grading</li>
+        <li class="breadcrumb-item active" aria-current="page">{{$type->name}}</li>
     </ol>
 </nav>
 
@@ -103,7 +103,7 @@
             <td>{{$en->lname}}, {{$en->fname}}</td>
             @foreach($scores as $idx=>$scoreSet)
                 <td class="center">
-                    {{$scoreSet[$i]->score}}
+                    {{isset($scoreSet[$i])?$scoreSet[$i]->score:"-"}}
                 </td>
             @endforeach
         </tr>

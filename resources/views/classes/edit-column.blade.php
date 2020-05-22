@@ -6,9 +6,16 @@
     <ol class="breadcrumb">
         <li class="breadcrumb-item"><a href='{{url("/users/load")}}'>Teaching Load</a></li>
         <li class="breadcrumb-item"><a href='{{url("/classes/{$column->colType->class_id}/columns")}}'>Class Grading</a></li>
-        <li class="breadcrumb-item active" aria-current="page">Edit Column</li>
+        <li class="breadcrumb-item"><a href='{{url("/types/$column->type_id")}}?term={{$column->term}}'>{{$column->colType->name}}</a></li>
+        <li class="breadcrumb-item active" aria-current="page">{{$column->title}}</li>
     </ol>
 </nav>
+
+<div class="float-right">
+    <a href='{{url("/columns/$column->id/sync")}}' class="btn btn-success">
+        <i class="fa fa-sync-alt"></i> Sync Column
+    </a>
+</div>
 
 <h1>Edit Column</h1>
 

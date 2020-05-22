@@ -58,6 +58,7 @@ Route::group(['middleware'=>'auth'], function() {
     Route::post('/classes/{class}/delete-type', 'GradingController@deleteType');
     Route::post('/classes/{class}/add-type', 'GradingController@addType');
     Route::post('/classes/{class}/add-column', 'GradingController@create');
+    Route::get('/columns/{column}/sync', 'GradingController@sync');
     Route::get('/columns/{column}', 'GradingController@edit');
     Route::patch('/columns/{column}', 'GradingController@update');
     Route::get('/classes/{class}/attn/create', 'AttendanceController@createAttendance');

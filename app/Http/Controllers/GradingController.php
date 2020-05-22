@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Classes;
 use App\ColType;
 use App\Column;
+use App\EnrolClass;
 use App\Score;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -143,5 +144,20 @@ class GradingController extends Controller
             'cols' => $cols,
             'scores' => $scores,
         ]);
+    }
+
+    public function sync(Column $column) {
+        $ens = EnrolClass::whereNotIn('enrol_id', Score::where('column_id', $column->id)->pluck('enrol_id'))
+                ->where('class_id', $column->colType->class_id)
+                ->get();
+        foreach($ens as $en) {
+            Score::create([
+                'column_id' => $column->id,
+                'enrol_id' => $en->enrol_id,
+                'score' => 0
+            ]);
+        }
+
+        return redirect()->back()->with('Info', 'Column has been synced.');
     }
 }
