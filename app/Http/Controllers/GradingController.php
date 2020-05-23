@@ -13,6 +13,11 @@ use Illuminate\Support\Facades\DB;
 class GradingController extends Controller
 {
     public function index(Classes $class) {
+        //check ownership
+        if ($class->user_id != auth()->user()->id) {
+            redirect()->back()->with('Error', 'Sorry you are not the teacher of this class.');
+        }
+
         $totals = [];
 
         $urlTerm = $this->getTerm($class);
@@ -30,10 +35,19 @@ class GradingController extends Controller
     }
 
     public function gradeSettings(Classes $class) {
+        //check ownership
+        if ($class->user_id != auth()->user()->id) {
+            redirect()->back()->with('Error', 'Sorry you are not the teacher of this class.');
+        }
         return view('classes.grade-settings', compact('class'));
     }
 
     public function addType(Classes $class, Request $request) {
+        //check ownership
+        if ($class->user_id != auth()->user()->id) {
+            redirect()->back()->with('Error', 'Sorry you are not the teacher of this class.');
+        }
+
         $this->validate($request,[
             'name' => 'required',
             'weight' => 'required|numeric',
@@ -51,11 +65,21 @@ class GradingController extends Controller
     }
 
     public function deleteType(Classes $class, Request $request) {
+        //check ownership
+        if ($class->user_id != auth()->user()->id) {
+            redirect()->back()->with('Error', 'Sorry you are not the teacher of this class.');
+        }
+
         DB::table('col_types')->where('id', $request['id'])->delete();
         return redirect()->back()->with('Info','The column type and its columns have been deleted.');
     }
 
     public function create(Classes $class, Request $request) {
+        //check ownership
+        if ($class->user_id != auth()->user()->id) {
+            redirect()->back()->with('Error', 'Sorry you are not the teacher of this class.');
+        }
+
         $col = Column::create([
             'term' => $request['term'],
             'title' => $request['title'],
@@ -75,11 +99,21 @@ class GradingController extends Controller
     }
 
     public function edit(Column $column) {
+        //check ownership
+        if ($column->colType->class->user_id != auth()->user()->id) {
+            redirect()->back()->with('Error', 'Sorry you are not the teacher of this class.');
+        }
+
         $terms = $this->getTerms($column->colType->class);
         return view('classes.edit-column', ['column'=>$column, 'terms'=>$terms]);
     }
 
     public function update(Column $column, Request $request) {
+        //check ownership
+        if ($column->colType->class->user_id != auth()->user()->id) {
+            redirect()->back()->with('Error', 'Sorry you are not the teacher of this class.');
+        }
+
         $column->update([
             'title' => $request['title'],
             'date' => $request['date'],
@@ -126,6 +160,10 @@ class GradingController extends Controller
     }
 
     public function viewType(ColType $type) {
+        //check ownership
+        if ($type->class->user_id != auth()->user()->id) {
+            redirect()->back()->with('Error', 'Sorry you are not the teacher of this class.');
+        }
         $urlTerm = $this->getTerm($type->class);
 
         $cols = $type->columns($urlTerm)->get();
@@ -147,6 +185,11 @@ class GradingController extends Controller
     }
 
     public function sync(Column $column) {
+        //check ownership
+        if ($column->colType->class->user_id != auth()->user()->id) {
+            redirect()->back()->with('Error', 'Sorry you are not the teacher of this class.');
+        }
+
         $ens = EnrolClass::whereNotIn('enrol_id', Score::where('column_id', $column->id)->pluck('enrol_id'))
                 ->where('class_id', $column->colType->class_id)
                 ->get();
@@ -159,5 +202,20 @@ class GradingController extends Controller
         }
 
         return redirect()->back()->with('Info', 'Column has been synced.');
+    }
+
+    public function delete(Column $column) {
+        //check ownership
+        if ($column->colType->class->user_id != auth()->user()->id) {
+            redirect()->back()->with('Error', 'Sorry you are not the teacher of this class.');
+        }
+
+        $typeId = $column->type_id;
+        $term = $column->term;
+        $title = $column->title;
+
+        $column->delete();
+
+        return redirect("/types/$typeId?term=$term")->with('Info', "The column '$title' has been deleted.");
     }
 }

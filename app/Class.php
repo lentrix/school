@@ -58,15 +58,6 @@ class Classes extends Model
     }
 
     public function enrolClasses($gender=null) {
-        // return EnrolClass::where('class_id', $this->id)
-        //     ->whereHas('enrol', function($q1) use ($gender) {
-        //         $q1->join('students','students.id','enrols.student_id')
-        //             ->orderByRaw('lname, fname')
-        //             ->with('students');
-        //         if($gender) {
-        //             $q1->where('gender', $gender);
-        //         }
-        //     })->get();
         $q = DB::table('enrol_classes')->where('class_id', $this->id)
             ->join('enrols', 'enrols.id','enrol_classes.enrol_id')
             ->join('students', 'students.id', 'enrols.student_id')

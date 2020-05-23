@@ -5,34 +5,34 @@
 <!-- Modal -->
 <div class="modal fade" id="deleteColTypeModal" tabindex="-1" role="dialog" aria-labelledby="deleteColTypeModalLabel" aria-hidden="true">
     <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="deleteColTypeModalLabel">Delete Column Type</h5>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="deleteColTypeModalLabel">Delete Column Type</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
         {!! Form::open(['url'=>"/classes/$class->id/delete-type", 'method'=>'post']) !!}
-        <div class="modal-body">
-          You are about to delete <span id="column_type_name" class="text-primary"></span> column type. <br>
-          Please take note that deleting this column type will result in the deletion of all
-          columns under this column type. <br><span style="color: red">Please proceed with caution!!!</span>
-          <input type="hidden" name="id" id="column_type_id">
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-          <button type="submit" class="btn btn-danger">Delete Column Type</button>
-        </div>
+            <div class="modal-body">
+                You are about to delete <span id="column_type_name" class="text-primary"></span> column type. <br>
+                Please take note that deleting this column type will result in the deletion of all
+                columns under this column type. <br><span style="color: red">Please proceed with caution!!!</span>
+                <input type="hidden" name="id" id="column_type_id">
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="submit" class="btn btn-danger">Delete Column Type</button>
+            </div>
         {!! Form::close() !!}
-      </div>
+        </div>
     </div>
 </div>
 
 <nav aria-label="breadcrumb">
     <ol class="breadcrumb">
-      <li class="breadcrumb-item"><a href='{{url("/users/load")}}'>Teaching Load</a></li>
-      <li class="breadcrumb-item"><a href='{{url("/classes/$class->id/columns")}}'>Class Grading</a></li>
-      <li class="breadcrumb-item active" aria-current="page">Grade Settings</li>
+        <li class="breadcrumb-item"><a href='{{url("/users/load")}}'>Teaching Load</a></li>
+        <li class="breadcrumb-item"><a href='{{url("/classes/$class->id/columns")}}'>Class Grading</a></li>
+        <li class="breadcrumb-item active" aria-current="page">Grade Settings</li>
     </ol>
 </nav>
 

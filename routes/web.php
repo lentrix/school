@@ -60,6 +60,7 @@ Route::group(['middleware'=>'auth'], function() {
     Route::post('/classes/{class}/add-column', 'GradingController@create');
     Route::get('/columns/{column}/sync', 'GradingController@sync');
     Route::get('/columns/{column}', 'GradingController@edit');
+    Route::delete('/columns/{column}', 'GradingController@delete');
     Route::patch('/columns/{column}', 'GradingController@update');
     Route::get('/classes/{class}/attn/create', 'AttendanceController@createAttendance');
     Route::get('/classes/{class}/attn/{month}', 'AttendanceController@attendance');

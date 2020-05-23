@@ -2,6 +2,33 @@
 
 @section('content')
 
+<!-- Modal -->
+<div class="modal fade" id="deleteColumnModal" tabindex="-1" role="dialog" aria-labelledby="deleteColumnModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="deleteColumnModalLabel">Delete Column</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+        {!! Form::open(['url'=>"/columns/$column->id", 'method'=>'delete']) !!}
+            <div class="modal-body">
+                <div class="alert alert-danger">
+                    You are about to delete this column "{{$column->title}}". This action will
+                    consequently delete all the scores related to this column. <br>
+                    Are you sure you want to delete this column?
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="submit" class="btn btn-danger">Delete Column</button>
+            </div>
+        {!! Form::close() !!}
+        </div>
+    </div>
+</div>
+
 <nav aria-label="breadcrumb">
     <ol class="breadcrumb">
         <li class="breadcrumb-item"><a href='{{url("/users/load")}}'>Teaching Load</a></li>
@@ -67,6 +94,8 @@
             <button class="btn btn-primary" type="submit">
                 <i class="fa fa-check"></i> Save Column
             </button>
+
+            <button class="btn btn-danger" type="button" data-toggle="modal" data-target="#deleteColumnModal">Delete Column</button>
         </div>
     </div>
 </div>
